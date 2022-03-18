@@ -77,7 +77,8 @@
     <!-- Elemento Flyout per tutte le pagine della scheda del personaggio -->
     <FlyoutItem FlyoutItemIsVisible="False">
         <Tab>
-            <ShellContent Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
+            <ShellContent Title="blank" Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
+            <ShellContent Title="Inventory" Route="InventoryPage" ContentTemplate="{DataTemplate local:InventoryPage}"/>
         </Tab>
     </FlyoutItem>
 

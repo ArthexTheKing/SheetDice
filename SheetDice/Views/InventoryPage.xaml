@@ -1,20 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
-    x:Class="SheetDice.Views.InventoryPage"
-    x:DataType="viewmodels:InventoryViewModel">
-    
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
+             x:Class="SheetDice.Views.InventoryPage"
+             x:DataType="viewmodels:InventoryViewModel">
+
     <ContentPage.BindingContext>
         <viewmodels:InventoryViewModel/>
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="MoneyEntry" TargetType="Entry">
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
+                <Setter Property="Placeholder" Value="0"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="MaxLength" Value="5"/>
+            </Style>
+
+            <Style x:Key="MoneyNameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="SaddleBrown"/>
+            </Style>
+
+            <Style x:Key="MoneyFrame" TargetType="Frame">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="BorderColor" Value="Gray"/>
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid RowDefinitions="120,*">
+            <StackLayout Margin="8" Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+                <Frame Style="{StaticResource MoneyFrame}">
+                    <StackLayout>
+                        <Label Text="cp" Style="{StaticResource MoneyNameLabel}"/>
+                        <Entry Style="{StaticResource MoneyEntry}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource MoneyFrame}">
+                    <StackLayout>
+                        <Label Text="sp" Style="{StaticResource MoneyNameLabel}"/>
+                        <Entry Style="{StaticResource MoneyEntry}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource MoneyFrame}">
+                    <StackLayout>
+                        <Label Text="ep" Style="{StaticResource MoneyNameLabel}"/>
+                        <Entry Style="{StaticResource MoneyEntry}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource MoneyFrame}">
+                    <StackLayout>
+                        <Label Text="gp" Style="{StaticResource MoneyNameLabel}"/>
+                        <Entry Style="{StaticResource MoneyEntry}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource MoneyFrame}">
+                    <StackLayout>
+                        <Label Text="pp" Style="{StaticResource MoneyNameLabel}"/>
+                        <Entry Style="{StaticResource MoneyEntry}"/>
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+
+
+            <Grid Grid.Row="1" BackgroundColor="Green">
+                
+            </Grid>
+
+
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
