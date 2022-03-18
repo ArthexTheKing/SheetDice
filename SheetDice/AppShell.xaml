@@ -35,7 +35,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
+                                    <Setter Property="BackgroundColor" Value="LightGray" />
                                     <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
                                 </VisualState.Setters>
                             </VisualState>
@@ -58,7 +58,8 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Black" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -76,12 +77,32 @@
     
     <!-- Elemento Flyout per tutte le pagine della scheda del personaggio -->
     <FlyoutItem FlyoutItemIsVisible="False">
-        <Tab>
-            <ShellContent Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
-        </Tab>
+        <ShellContent Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="BlankMenuItem" StyleClass="MenuItemLayoutStyle" />
+    <!-- <MenuItem Text="BlankMenuItem" StyleClass="MenuItemLayoutStyle" /> -->
+    <MenuItem Text="Nome Utente" StyleClass="MenuItemLayoutStyle"/>
+    <MenuItem Text="" StyleClass="MenuItemLayoutStyle"/>
+    <MenuItem Text="" StyleClass="MenuItemLayoutStyle"/>
+    <MenuItem Text="" StyleClass="MenuItemLayoutStyle"/>
+    <MenuItem Text="Nome PG" StyleClass="MenuItemLayoutStyle" />
+    <MenuItem Text="Livello PG" StyleClass="MenuItemLayoutStyle" />
+    <MenuItem Text="Esperienza del PG" StyleClass="MenuItemLayoutStyle" />
+    <MenuItem Text="Classe e Sottoclasse" StyleClass="MenuItemLayoutStyle" />
+    <MenuItem Text="Razza e Sottorazza" StyleClass="MenuItemLayoutStyle" />
+    <MenuItem Text="Background" StyleClass="MenuItemLayoutStyle" />
 
+
+    <FlyoutItem Title="Opzioni">
+        <ShellContent Route="Opzioni" ContentTemplate="{DataTemplate local:Opzioni}" />
+    </FlyoutItem>
+    <FlyoutItem Title="About us">
+        <ShellContent Route="AboutUs" ContentTemplate="{DataTemplate local:AboutUs}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Help">
+        <ShellContent Route="Help" ContentTemplate="{DataTemplate local:Help}" />
+    </FlyoutItem>
+    
+    
 </Shell>
