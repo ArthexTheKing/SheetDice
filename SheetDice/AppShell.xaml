@@ -78,6 +78,7 @@
     <FlyoutItem FlyoutItemIsVisible="False">
         <Tab>
             <ShellContent Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
+            <ShellContent Route="Principale" ContentTemplate="{DataTemplate local:Page1}" />
         </Tab>
     </FlyoutItem>
 
