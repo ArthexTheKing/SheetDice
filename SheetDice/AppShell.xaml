@@ -35,7 +35,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="LightGray" />
+                                    <Setter Property="BackgroundColor" Value="White"/>
                                     <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
                                 </VisualState.Setters>
                             </VisualState>
@@ -82,27 +82,40 @@
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <!-- <MenuItem Text="BlankMenuItem" StyleClass="MenuItemLayoutStyle" /> -->
-    <MenuItem Text="Nome Utente" StyleClass="MenuItemLayoutStyle"/>
-    <MenuItem Text="" StyleClass="MenuItemLayoutStyle"/>
-    <MenuItem Text="" StyleClass="MenuItemLayoutStyle"/>
-    <MenuItem Text="" StyleClass="MenuItemLayoutStyle"/>
-    <MenuItem Text="Nome PG" StyleClass="MenuItemLayoutStyle" />
-    <MenuItem Text="Livello PG" StyleClass="MenuItemLayoutStyle" />
-    <MenuItem Text="Esperienza del PG" StyleClass="MenuItemLayoutStyle" />
-    <MenuItem Text="Classe e Sottoclasse" StyleClass="MenuItemLayoutStyle" />
-    <MenuItem Text="Razza e Sottorazza" StyleClass="MenuItemLayoutStyle" />
-    <MenuItem Text="Background" StyleClass="MenuItemLayoutStyle" />
-
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" IsEnabled="False">
+        <ShellContent Title="Nome PG"/>
+        <ShellContent Title="Livello PG"/>
+        <ShellContent Title="EXP"/>
+        <ShellContent Title="Classe e sottoclasse"/>
+        <ShellContent Title="Razza e sottorazza"/>
+        <ShellContent Title="Background"/>
+    </FlyoutItem>
 
     <FlyoutItem Title="Opzioni">
         <ShellContent Route="Opzioni" ContentTemplate="{DataTemplate local:Opzioni}" />
     </FlyoutItem>
+
     <FlyoutItem Title="About us">
         <ShellContent Route="AboutUs" ContentTemplate="{DataTemplate local:AboutUs}" />
     </FlyoutItem>
+
     <FlyoutItem Title="Help">
         <ShellContent Route="Help" ContentTemplate="{DataTemplate local:Help}" />
     </FlyoutItem>
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="{StaticResource Primary}"
+                  HeightRequest="200">
+                <Label Text="Quì ci sarà l'immagine"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
     
     
 </Shell>
