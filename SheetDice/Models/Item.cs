@@ -1,6 +1,6 @@
 ﻿namespace SheetDice.Models
 {
-    public class Item
+    public class Item : object
     {
         public string Name { get; set; } //Name of the item
         public float Weight { get; set; } //Weight of the item (in lb?)
@@ -10,7 +10,7 @@
         public bool IsMagical { get; set; } //if this item is a magical item
         public string Description { get; set; } //the description of this item
         public bool IsEquipped { get; set; } //this item is or is not equipped, and it is in your bag
-
+        
         public Item(string name, string description, string category)
         {
             this.Name = name;
@@ -22,5 +22,6 @@
             this.IsMagical = false;
             this.IsEquipped = false;
         }
+        
     }
 }
