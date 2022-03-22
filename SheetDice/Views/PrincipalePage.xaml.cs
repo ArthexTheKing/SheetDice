@@ -16,5 +16,12 @@ namespace SheetDice.Views
         {
             InitializeComponent();
         }
+
+       /*int count = 0;
+
+        private void HdAumento(object sender, EventArgs e)
+        {
+            count++;
+        }*/
     }
 }
