@@ -104,6 +104,10 @@
         <ShellContent Route="Help" ContentTemplate="{DataTemplate local:Help}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Character Selection">
+        <ShellContent Route="CharacterSelection" ContentTemplate="{DataTemplate local:CharacterSelection}" />
+    </FlyoutItem>
+
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid BackgroundColor="{StaticResource Primary}"
