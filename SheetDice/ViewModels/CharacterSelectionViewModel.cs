@@ -1,10 +1,8 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace SheetDice.ViewModels
 {
@@ -13,6 +11,8 @@ namespace SheetDice.ViewModels
         public ObservableRangeCollection<Character> Characters { get; }
         public AsyncCommand RefreshCommand { get; }
 
+        public AsyncCommand<Character> FavoriteCommand { get; } 
+        
         public CharacterSelectionViewModel()
         {
             Characters = new ObservableRangeCollection<Character>
@@ -23,8 +23,36 @@ namespace SheetDice.ViewModels
             };
 
             RefreshCommand = new AsyncCommand(Refresh);
+            FavoriteCommand = new AsyncCommand<Character>(Favorite);
 
         }
+
+        async Task Favorite(Character character)
+        {
+            if(character == null) {
+                return; 
+            }
+            await Application.Current.MainPage.DisplayAlert("Favorited", character.Name, "OK");
+        } 
+
+        Character previouslySelected;
+        Character selectedCharacter;
+        public Character SelectedCharacter
+        {
+            get=> selectedCharacter;
+            set
+            {
+                if (value != null)
+                {
+                    Application.Current.MainPage.DisplayAlert("Selected", value.Name, "OK");
+                    previouslySelected = value;
+                    value = null;
+                }
+                selectedCharacter = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         async Task Refresh()
         {

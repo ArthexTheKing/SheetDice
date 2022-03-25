@@ -4,7 +4,8 @@
              xmlns:viewmodels="clr-namespace:SheetDice.ViewModels" 
              x:DataType="viewmodels:CharacterSelectionViewModel"
              x:Class="SheetDice.Views.CharacterSelection"
-             xmlns:models="clr-namespace:SheetDice.Models">
+             xmlns:models="clr-namespace:SheetDice.Models"
+             x:Name="CharacterSelectionPage">
 
     <ContentPage.BindingContext>
         <viewmodels:CharacterSelectionViewModel/>
@@ -18,14 +19,15 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   RefreshControlColor="Red"
                   CachingStrategy="RecycleElement"
-                  ItemSelected="ListView_ItemSelected"
-                  ItemTapped="ListView_ItemTapped">
+                  SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Character">
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="Favorite" Clicked="MenuItem_Clicked"/>
+                            <MenuItem Text="Favorite" 
+                                      Command="{Binding Source={x:Reference CharacterSelectionPage},Path=BindingContext.FavoriteCommand}"
+                                      CommandParameter="{Binding .}"/>
                             <MenuItem Text="Delete" IsDestructive="True"/>
                         </ViewCell.ContextActions>
                         <Grid Padding="10">

@@ -4,7 +4,7 @@
              x:Class="SheetDice.Views.Opzioni">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Quà ci saranno le opzioni"
+            <Label Text="La pagina opzioni verrà poi rimossa e verranno aggiunti al flyout l'attivazione della dark mode ed un eventuale cambio della lingua"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
