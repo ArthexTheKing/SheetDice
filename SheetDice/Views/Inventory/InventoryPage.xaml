@@ -39,13 +39,22 @@
                 <Setter Property="HasShadow" Value="True"/>
             </Style>
 
+            <Style x:Key="AddItemButton" TargetType="Button">
+                <Setter Property="Text" Value="+"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="100"/>
+            </Style>
+
             <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
 
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid RowDefinitions="120,*">
+        <Grid RowDefinitions="120, *, Auto">
             <StackLayout Margin="8"
                          Grid.Row="0"
                          Orientation="Horizontal"
@@ -102,13 +111,13 @@
                           SelectedItem="{Binding ItemSelected, Mode=TwoWay}"
                           SeparatorVisibility="None"
                           RowHeight="80">
+                    
                     <ListView.Behaviors>
                         <xct:EventToCommandBehavior
                             EventName="ItemSelected"
                             Command="{Binding SelectedCommand}"
                             EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
                     </ListView.Behaviors>
-
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:Item">
@@ -135,9 +144,14 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    
                 </ListView>
                 
             </StackLayout>
+
+            <Frame Grid.Row="2" Padding="10">
+                <Button Style="{StaticResource AddItemButton}"/>
+            </Frame>
 
         </Grid>
 

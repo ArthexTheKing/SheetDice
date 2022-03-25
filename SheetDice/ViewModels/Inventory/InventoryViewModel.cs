@@ -1,7 +1,6 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
-using System;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -10,6 +9,12 @@ namespace SheetDice.ViewModels.Inventory
 {
     public class InventoryViewModel : BaseViewModel
     {
+        Item itemSelected;
+        public Item ItemSelected
+        {
+            get => itemSelected;
+            set => SetProperty(ref itemSelected, value);
+        }
         public ObservableRangeCollection<Item> Equipment { get; set; }
         public AsyncCommand<object> SelectedCommand { get; }
 
@@ -26,13 +31,6 @@ namespace SheetDice.ViewModels.Inventory
             SelectedCommand = new AsyncCommand<object>(Selected);
         }
 
-        Item itemSelected;
-        public Item ItemSelected
-        {
-            get => itemSelected;
-            set => SetProperty(ref itemSelected, value);
-        }
-
         async Task Selected(object obj)
         {
             if (!(obj is Item item))
@@ -41,7 +39,6 @@ namespace SheetDice.ViewModels.Inventory
             string description = this.TextDescription(item);
             await Application.Current.MainPage.DisplayAlert(item.Name, description, "close");
         }
-
         private string TextDescription (Item item)
         {
             StringBuilder sb = new StringBuilder();
