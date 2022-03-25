@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
+using SheetDice.Views.Inventory;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -17,6 +18,7 @@ namespace SheetDice.ViewModels.Inventory
         }
         public ObservableRangeCollection<Item> Equipment { get; set; }
         public AsyncCommand<object> SelectedCommand { get; }
+        public AsyncCommand AddItemCommand { get; }
 
         public InventoryViewModel()
         {
@@ -29,8 +31,14 @@ namespace SheetDice.ViewModels.Inventory
             };
 
             SelectedCommand = new AsyncCommand<object>(Selected);
+            AddItemCommand = new AsyncCommand(AddItem);
         }
 
+        async Task AddItem()
+        {
+            var route = $"{nameof(ItemCreationPage)}";
+            await Shell.Current.GoToAsync(route);
+        }
         async Task Selected(object obj)
         {
             if (!(obj is Item item))

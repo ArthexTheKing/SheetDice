@@ -150,7 +150,8 @@
             </StackLayout>
 
             <Frame Grid.Row="2" Padding="10">
-                <Button Style="{StaticResource AddItemButton}"/>
+                <Button Style="{StaticResource AddItemButton}"
+                        Command="{Binding AddItemCommand}"/>
             </Frame>
 
         </Grid>
