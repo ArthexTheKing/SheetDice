@@ -11,9 +11,10 @@ namespace SheetDice.ViewModels
         {
             Equipment = new ObservableRangeCollection<Item>
             {
-                new Item("spada", "descrizione", "arma"),
-                new Item("scudo", "descrizione", "arma"),
-                new Item("armatura", "descrizione", "armatura")
+                new Item() { Name = "spada", Description = "descrizione", Value = 10 },
+                new Item() { Name = "piccone", Description = "descrizione", Value = 10 },
+                new Item() { Name = "ascia", Description = "descrizione", Value = 10 },
+                new Item() { Name = "pala", Description = "descrizione", Value = 10 }
             };
 
         }
