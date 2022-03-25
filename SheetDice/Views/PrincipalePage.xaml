@@ -6,6 +6,10 @@
              xmlns:models="clr-namespace:SheetDice.Models"
              x:Class="SheetDice.Views.Page1">
 
+    <ContentPage.BindingContext>
+        <viewmodels:AttackViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="GridColor">Red</Color>
