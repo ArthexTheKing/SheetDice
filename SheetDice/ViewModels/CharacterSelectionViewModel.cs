@@ -4,6 +4,7 @@ using SheetDice.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SheetDice.ViewModels
 {
@@ -20,6 +21,16 @@ namespace SheetDice.ViewModels
                 new Character("Albert"),
                 new Character("Baldwin")
             };
+
+            RefreshCommand = new AsyncCommand(Refresh);
+
+        }
+
+        async Task Refresh()
+        {
+            IsBusy = true;
+            await Task.Delay(2000);
+            IsBusy = false;
         }
     }
 }

@@ -11,13 +11,25 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Characters}" HasUnevenRows="True">
+        <ListView ItemsSource="{Binding Characters}" 
+                  HasUnevenRows="True" 
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  RefreshControlColor="Red"
+                  CachingStrategy="RecycleElement"
+                  ItemSelected="ListView_ItemSelected"
+                  ItemTapped="ListView_ItemTapped">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Character">
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Favorite" Clicked="MenuItem_Clicked"/>
+                            <MenuItem Text="Delete" IsDestructive="True"/>
+                        </ViewCell.ContextActions>
                         <Grid Padding="10">
-                            <Frame>
+                            <Frame CornerRadius="20">
                                 <StackLayout>
                                     <Label VerticalOptions="Center" Text="{Binding Name}" FontSize="Large"/>
                                 </StackLayout>
