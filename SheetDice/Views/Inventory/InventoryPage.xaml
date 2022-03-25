@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
-            xmlns:models="clr-namespace:SheetDice.Models"
-            x:Class="SheetDice.Views.InventoryPage"
-            x:DataType="viewmodels:InventoryViewModel">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels.Inventory"
+             xmlns:models="clr-namespace:SheetDice.Models"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="SheetDice.Views.InventoryPage"
+             x:DataType="viewmodels:InventoryViewModel">
 
     <ContentPage.BindingContext>
         <viewmodels:InventoryViewModel/>
@@ -37,6 +38,8 @@
                 <Setter Property="HeightRequest" Value="80"/>
                 <Setter Property="HasShadow" Value="True"/>
             </Style>
+
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
 
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -93,11 +96,19 @@
                     <Label Grid.Column="1" Text="Name" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
                     <Label Grid.Column="2" Text="Quantity" VerticalTextAlignment="End" HorizontalTextAlignment="Start"/>
                 </Grid>
-                
+
                 <ListView BackgroundColor="Transparent"
-                      ItemsSource="{Binding Equipment}"
-                      SeparatorVisibility="None"
-                      RowHeight="80">
+                          ItemsSource="{Binding Equipment}"
+                          SelectedItem="{Binding ItemSelected, Mode=TwoWay}"
+                          SeparatorVisibility="None"
+                          RowHeight="80">
+                    <ListView.Behaviors>
+                        <xct:EventToCommandBehavior
+                            EventName="ItemSelected"
+                            Command="{Binding SelectedCommand}"
+                            EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+                    </ListView.Behaviors>
+
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:Item">
