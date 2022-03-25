@@ -86,7 +86,7 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" IsEnabled="False">
         <ShellContent Title="Nome PG"/>
         <ShellContent Title="Livello PG"/>
-        <ShellContent Title="EXP"/>
+        <ShellContent Title="Allineamento PG"/>
         <ShellContent Title="Classe e sottoclasse"/>
         <ShellContent Title="Razza e sottorazza"/>
         <ShellContent Title="Background"/>
@@ -106,6 +106,10 @@
 
     <FlyoutItem Title="Character Selection">
         <ShellContent Route="CharacterSelection" ContentTemplate="{DataTemplate local:CharacterSelection}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Character Creation">
+        <ShellContent Route="CharacterCreation" ContentTemplate="{DataTemplate local:CharacterCreation}" />
     </FlyoutItem>
 
     <Shell.FlyoutHeaderTemplate>

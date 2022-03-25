@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SheetDice.Views.CharacterCreation">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Creazione del personaggio"
+                HorizontalOptions="CenterAndExpand" />
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="A." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Nome del personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="B." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Livello del personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="C." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Allineamento personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="D." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Classe personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="E." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Sottovlasse personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="F." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Razza personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="G." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Sottorazza personaggio" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,300,*">
+                <Label Text="H." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="NomePG" Placeholder="Background personaggio" Grid.Column="1"/>
+            </Grid>
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

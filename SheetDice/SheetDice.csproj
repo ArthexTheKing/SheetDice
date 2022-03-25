@@ -20,6 +20,9 @@
     <Compile Update="Views\CharacterSelection.xaml.cs">
       <DependentUpon>CharacterSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CharacterCreation.xaml.cs">
+      <DependentUpon>CharacterCreation.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +39,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CharacterSelection.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CharacterCreation.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
