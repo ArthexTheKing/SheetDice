@@ -110,7 +110,10 @@
                           ItemsSource="{Binding Equipment}"
                           SelectedItem="{Binding ItemSelected, Mode=TwoWay}"
                           SeparatorVisibility="None"
-                          RowHeight="80">
+                          RowHeight="80"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          CachingStrategy="RecycleElement">
                     
                     <ListView.Behaviors>
                         <xct:EventToCommandBehavior

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using SQLite;
 using SheetDice.Models;
+using System.Collections.Generic;
 
 namespace SheetDice.Services
 {
@@ -34,7 +35,12 @@ namespace SheetDice.Services
             await db.DeleteAsync<Item>(id);
         }
 
-
+        public static async Task<IEnumerable<Item>> GetItems()
+        {
+            await Init();
+            var items = await db.Table<Item>().ToListAsync();
+            return items;
+        }
 
     }
 }

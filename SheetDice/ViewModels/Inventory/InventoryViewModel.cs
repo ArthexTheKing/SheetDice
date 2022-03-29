@@ -19,6 +19,7 @@ namespace SheetDice.ViewModels.Inventory
         public ObservableRangeCollection<Item> Equipment { get; set; }
         public AsyncCommand<object> SelectedCommand { get; }
         public AsyncCommand AddItemCommand { get; }
+        public AsyncCommand RefreshCommand { get; }
 
         public InventoryViewModel()
         {
@@ -32,6 +33,14 @@ namespace SheetDice.ViewModels.Inventory
 
             SelectedCommand = new AsyncCommand<object>(Selected);
             AddItemCommand = new AsyncCommand(AddItem);
+            RefreshCommand = new AsyncCommand(Refresh);
+        }
+
+        async Task Refresh()
+        {
+            IsBusy = true;
+            await Task.Delay(500);
+            IsBusy = false;
         }
 
         async Task AddItem()
@@ -39,6 +48,7 @@ namespace SheetDice.ViewModels.Inventory
             var route = $"{nameof(ItemCreationPage)}";
             await Shell.Current.GoToAsync(route);
         }
+
         async Task Selected(object obj)
         {
             if (!(obj is Item item))
@@ -47,6 +57,7 @@ namespace SheetDice.ViewModels.Inventory
             string description = this.TextDescription(item);
             await Application.Current.MainPage.DisplayAlert(item.Name, description, "close");
         }
+
         private string TextDescription (Item item)
         {
             StringBuilder sb = new StringBuilder();
