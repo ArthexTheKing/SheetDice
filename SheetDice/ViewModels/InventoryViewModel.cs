@@ -38,8 +38,7 @@ namespace SheetDice.ViewModels
             //await Shell.Current.GoToAsync(route);
             
             var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Inserisci il nome dell'oggetto");
-            var descrizione = await App.Current.MainPage.DisplayPromptAsync("Description", "Inserisci la descrizione");
-            Item item = new Item() { Name = name, Description = descrizione, Value = 0 };
+            Item item = new Item() { Name = name, Description = "", Value = 0 };
             await ItemDatabase.AddItem(item);
             await Refresh();
             
