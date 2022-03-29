@@ -4,7 +4,8 @@
              xmlns:viewmodels="clr-namespace:SheetDice.ViewModels" 
              x:DataType="viewmodels:AttackViewModel"
              xmlns:models="clr-namespace:SheetDice.Models"
-             x:Class="SheetDice.Views.Page1">
+             x:Class="SheetDice.Views.Page1"
+             x:Name="PrincipalePage">
 
     <ContentPage.BindingContext>
         <viewmodels:AttackViewModel/>
@@ -36,7 +37,9 @@
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition>
@@ -99,16 +102,53 @@
             <Label Text="Inspiration" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
             <Button BackgroundColor="LightBlue" CornerRadius="100" HorizontalOptions="Center" Clicked="Ispirazione" Text="X"></Button>
         </StackLayout>
-        <StackLayout Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3">
-            <ListView BackgroundColor="Transparent"
-                      ItemsSource="{Binding Attacks}">
+        <StackLayout Grid.Column="0" Grid.Row="5">
+            <Label Text="Attacks:" FontSize="Large" VerticalOptions="EndAndExpand"></Label>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3">
+            <ListView SelectedItem="{Binding SelectedAttack, Mode=TwoWay}"
+                      CachingStrategy="RecycleElement"
+                      BackgroundColor="Transparent"
+                      ItemsSource="{Binding Attacks}"
+                      SeparatorColor="Black"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      RefreshCommand="{Binding RefreshComand}"
+                      RefreshControlColor="DeepSkyBlue">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Attack">
-                        <TextCell  Text="{Binding Name}"
-                                   Detail="{Binding Type}"></TextCell>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Favourite" 
+                                          Command="{Binding Source={x:Reference PrincipalePage}, Path=BindingContext.FavoriteComand}" 
+                                          CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Delete" IsDestructive="True"/>
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout  Grid.Column="0">
+                                    <Label VerticalOptions="Center" FontSize="Medium" Text="{Binding Name}"></Label>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Label VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding Damage}">
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding Type}"></Label>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="7">
+                <Button BackgroundColor="LightBlue" Text="+" FontSize="Large" CornerRadius="360"></Button>
         </StackLayout>
     </Grid>
 </ContentPage>

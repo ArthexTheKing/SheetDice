@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SheetDice.Models;
 
 namespace SheetDice.Views
 {
@@ -47,6 +48,29 @@ namespace SheetDice.Views
                 ((Button)sender).Text = "X";
                 isp = 1;
             }
+        }
+
+        private async void ListView_Seleziono(object sender, SelectedItemChangedEventArgs e)
+        {
+            var Attack = ((ListView)sender).SelectedItem as Attack;
+            if (Attack == null)
+                return;
+
+            await DisplayAlert("Attack Selected", Attack.Name, "Ok");
+        }
+
+        private void ListView_Tap(object sender, ItemTappedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            var Attack = ((MenuItem)sender).BindingContext as Attack;
+            if (Attack == null)
+                return;
+
+            await DisplayAlert("Attack Favourite", Attack.Name, "Ok");
         }
     }
 }
