@@ -1,4 +1,4 @@
-﻿using SheetDice.Views.Inventory;
+﻿
 using Xamarin.Forms;
 
 namespace SheetDice

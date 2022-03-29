@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SheetDice.Views.Inventory
+namespace SheetDice.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemCreationPage : ContentPage

@@ -2,7 +2,7 @@
 using MvvmHelpers.Commands;
 using SheetDice.Models;
 using SheetDice.Services;
-using SheetDice.Views.Inventory;
+
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -35,8 +35,8 @@ namespace SheetDice.ViewModels.Inventory
 
         async Task AddItem()
         {
-            var route = $"{nameof(ItemCreationPage)}";
-            await Shell.Current.GoToAsync(route);
+            //var route = $"{nameof(ItemCreationPage)}";
+            //await Shell.Current.GoToAsync(route);
             /*
             var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Inserisci il nome dell'oggetto");
             var descrizione = await App.Current.MainPage.DisplayPromptAsync("Description", "Inserisci la descrizione");
