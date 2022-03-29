@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
+             x:Class="SheetDice.Views.ItemCreationPage"
+             x:DataType="viewmodels:ItemCreationViewModel">
+    
+    <ContentPage.BindingContext>
+        <viewmodels:ItemCreationViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Frame BackgroundColor="LightGray" Padding="10">
+            <StackLayout>
+
+                <Frame BackgroundColor="White" Padding="10">
+                    <StackLayout>
+                        <Label Text="Name" FontSize="12" TextColor="Black"/>
+                        <Entry/>
+                    </StackLayout>
+                </Frame>
+
+                <Grid ColumnDefinitions="*,*,*">
+
+                    <Frame BackgroundColor="White" Padding="10" Grid.Column="0">
+                        <StackLayout>
+                            <Label Text="Weight (lb)" FontSize="12" TextColor="Black"/>
+                            <Entry/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame BackgroundColor="White" Padding="10" Grid.Column="1">
+                        <StackLayout>
+                            <Label Text="Value (gp)" FontSize="12" TextColor="Black"/>
+                            <Entry/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame BackgroundColor="White" Padding="10" Grid.Column="2">
+                        <StackLayout>
+                            <Label Text="Quantity" FontSize="12" TextColor="Black"/>
+                            <Entry/>
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+                
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+    
+</ContentPage>
