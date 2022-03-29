@@ -27,11 +27,12 @@ namespace SheetDice.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public double Weight { get; set; }
         public int Value { get; set; }
-        public int Quantity { get; set; } = 1;
-        public double Weight { get; set; } = 0.0;
+        public int Quantity { get; set; }
         public ItemType Category { get; set; } = ItemType.None;
-        public bool IsMagical { get; set; } = false;
+        public bool IsMagical { get; set; }
+        public string Description { get; set; }
+        
     }
 }

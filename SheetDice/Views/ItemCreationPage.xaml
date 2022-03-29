@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
              x:Class="SheetDice.Views.ItemCreationPage"
-             x:DataType="viewmodels:ItemCreationViewModel">
+             x:DataType="viewmodels:ItemCreationViewModel"
+             x:Name="Item">
     
     <ContentPage.BindingContext>
         <viewmodels:ItemCreationViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Create" Command="{Binding CreateCommand}"/>
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
         <Frame BackgroundColor="LightGray" Padding="10">
@@ -16,7 +21,7 @@
                 <Frame BackgroundColor="White" Padding="10">
                     <StackLayout>
                         <Label Text="Name" FontSize="12" TextColor="Black"/>
-                        <Entry/>
+                        <Entry Text="{Binding NameEntry}"/>
                     </StackLayout>
                 </Frame>
 
@@ -25,27 +30,39 @@
                     <Frame BackgroundColor="White" Padding="10" Grid.Column="0">
                         <StackLayout>
                             <Label Text="Weight (lb)" FontSize="12" TextColor="Black"/>
-                            <Entry/>
+                            <Entry Text="{Binding WeightEntry}"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame BackgroundColor="White" Padding="10" Grid.Column="1">
                         <StackLayout>
                             <Label Text="Value (gp)" FontSize="12" TextColor="Black"/>
-                            <Entry/>
+                            <Entry Text="{Binding ValueEntry}"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame BackgroundColor="White" Padding="10" Grid.Column="2">
                         <StackLayout>
                             <Label Text="Quantity" FontSize="12" TextColor="Black"/>
-                            <Entry/>
+                            <Entry Text="{Binding QuantityEntry}"/>
                         </StackLayout>
                     </Frame>
 
                 </Grid>
 
-                <Picker ItemsSource="{Binding ItemTypes}"/>
+                <Frame BackgroundColor="White" Padding="10" Grid.Column="0">
+                    <StackLayout>
+                        <Label Text="Category" FontSize="12" TextColor="Black"/>
+                        <Picker ItemsSource="{Binding ItemTypes}"
+                                SelectedItem="{Binding CategorySelected}"
+                                FontSize="14"/>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsMagicalCheck}"/>
+                    <Label Text="Magical Item" VerticalTextAlignment="Center" TextColor="Black"/>
+                </StackLayout>
 
 
 
