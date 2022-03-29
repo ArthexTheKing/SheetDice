@@ -2,12 +2,11 @@
 using MvvmHelpers.Commands;
 using SheetDice.Models;
 using SheetDice.Services;
-
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SheetDice.ViewModels.Inventory
+namespace SheetDice.ViewModels
 {
     public class InventoryViewModel : BaseViewModel
     {
@@ -37,13 +36,13 @@ namespace SheetDice.ViewModels.Inventory
         {
             //var route = $"{nameof(ItemCreationPage)}";
             //await Shell.Current.GoToAsync(route);
-            /*
+            
             var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Inserisci il nome dell'oggetto");
             var descrizione = await App.Current.MainPage.DisplayPromptAsync("Description", "Inserisci la descrizione");
             Item item = new Item() { Name = name, Description = descrizione, Value = 0 };
             await ItemDatabase.AddItem(item);
             await Refresh();
-            */
+            
         }
 
         async Task RemoveItem(Item item)
