@@ -4,7 +4,7 @@
        xmlns:local="clr-namespace:SheetDice.Views"
        Title="SheetDice"
        x:Class="SheetDice.AppShell"
-       >
+       FlyoutHeaderBehavior="CollapseOnScroll">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -107,6 +107,10 @@
 
     <FlyoutItem Title="Character Selection">
         <ShellContent Route="CharacterSelection" ContentTemplate="{DataTemplate local:CharacterSelection}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Character Selection CV">
+        <ShellContent Route="CharacterSelection CV" ContentTemplate="{DataTemplate local:CharacterSelectionCV}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Character Creation">

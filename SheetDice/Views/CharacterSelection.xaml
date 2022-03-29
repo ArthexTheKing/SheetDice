@@ -40,7 +40,13 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
+            <ListView.Footer>
+                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                    <Button
+                    Command="{Binding LoadMoreCommand}"
+                    Text="Load More" />
+                </StackLayout>
+            </ListView.Footer>
         </ListView>
     </ContentPage.Content>
 </ContentPage>
