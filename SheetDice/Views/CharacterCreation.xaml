@@ -12,31 +12,31 @@
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="B." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Livello del personaggio" Grid.Column="1"/>
+                <Entry x:Name="LivelloPG" Placeholder="Livello del personaggio" Grid.Column="1"/>
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="C." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Allineamento personaggio" Grid.Column="1"/>
+                <Entry x:Name="AllineamentoPG" Placeholder="Allineamento personaggio" Grid.Column="1"/>
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="D." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Classe personaggio" Grid.Column="1"/>
+                <Entry x:Name="ClassePG" Placeholder="Classe personaggio" Grid.Column="1"/>
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="E." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Sottovlasse personaggio" Grid.Column="1"/>
+                <Entry x:Name="SottoclassePG" Placeholder="Sottoclasse personaggio" Grid.Column="1"/>
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="F." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Razza personaggio" Grid.Column="1"/>
+                <Entry x:Name="RazzaPG" Placeholder="Razza personaggio" Grid.Column="1"/>
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="G." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Sottorazza personaggio" Grid.Column="1"/>
+                <Entry x:Name="SottorazzaPG" Placeholder="Sottorazza personaggio" Grid.Column="1"/>
             </Grid>
             <Grid ColumnDefinitions="*,300,*">
                 <Label Text="H." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Background personaggio" Grid.Column="1"/>
+                <Entry x:Name="BackgroundPG" Placeholder="Background personaggio" Grid.Column="1"/>
             </Grid>
             
             

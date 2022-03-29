@@ -3,7 +3,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:SheetDice.Views"
        Title="SheetDice"
-       x:Class="SheetDice.AppShell">
+       x:Class="SheetDice.AppShell"
+       >
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
