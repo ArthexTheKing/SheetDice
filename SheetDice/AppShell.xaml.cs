@@ -9,7 +9,7 @@ namespace SheetDice
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(ItemCreationPage), typeof(ItemCreationPage));
+            //Routing.RegisterRoute(nameof(ItemCreationPage), typeof(ItemCreationPage));
         }
     }
 }

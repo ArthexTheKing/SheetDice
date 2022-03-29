@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
+using SheetDice.Services;
 using SheetDice.Views.Inventory;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,34 +21,48 @@ namespace SheetDice.ViewModels.Inventory
         public AsyncCommand<object> SelectedCommand { get; }
         public AsyncCommand AddItemCommand { get; }
         public AsyncCommand RefreshCommand { get; }
+        public AsyncCommand<Item> RemoveCommand { get; }
 
         public InventoryViewModel()
         {
-            Equipment = new ObservableRangeCollection<Item>
-            {
-                new Item() { Name = "Spada", Description = "descrizione", Value = 10 },
-                new Item() { Name = "Piccone", Description = "descrizione", Value = 10 },
-                new Item() { Name = "Ascia", Description = "descrizione", Value = 10 },
-                new Item() { Name = "Pala", Description = "descrizione", Value = 10 }
-            };
+            Equipment = new ObservableRangeCollection<Item>();
 
             SelectedCommand = new AsyncCommand<object>(Selected);
             AddItemCommand = new AsyncCommand(AddItem);
             RefreshCommand = new AsyncCommand(Refresh);
-        }
-
-        async Task Refresh()
-        {
-            IsBusy = true;
-            await Task.Delay(500);
-            IsBusy = false;
+            RemoveCommand = new AsyncCommand<Item>(RemoveItem);
         }
 
         async Task AddItem()
         {
             var route = $"{nameof(ItemCreationPage)}";
             await Shell.Current.GoToAsync(route);
+            /*
+            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Inserisci il nome dell'oggetto");
+            var descrizione = await App.Current.MainPage.DisplayPromptAsync("Description", "Inserisci la descrizione");
+            Item item = new Item() { Name = name, Description = descrizione, Value = 0 };
+            await ItemDatabase.AddItem(item);
+            await Refresh();
+            */
         }
+
+        async Task RemoveItem(Item item)
+        {
+            await ItemDatabase.RemoveItem(item.Id);
+            await Refresh();
+        }
+
+        async Task Refresh()
+        {
+            IsBusy = true;
+            await Task.Delay(500);
+            Equipment.Clear();
+            var items = await ItemDatabase.GetItems();
+            Equipment.AddRange(items); 
+            IsBusy = false;
+        }
+
+        
 
         async Task Selected(object obj)
         {

@@ -2,9 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:SheetDice.ViewModels.Inventory"
-             x:Class="SheetDice.Views.Inventory.ItemCreationPage"
-             x:DataType="viewmodels:ItemCreationViewModel"
-             Shell.PresentationMode="Modal">
+             x:Class="SheetDice.Views.ItemCreationPage"
+             x:DataType="viewmodels:ItemCreationViewModel">
 
     <ContentPage.BindingContext>
         <viewmodels:ItemCreationViewModel/>
@@ -12,8 +11,9 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="GoBack" FontSize="Large" Command="{Binding AddItemCommand}"/>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
-    
 </ContentPage>

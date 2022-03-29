@@ -5,7 +5,8 @@
              xmlns:models="clr-namespace:SheetDice.Models"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="SheetDice.Views.InventoryPage"
-             x:DataType="viewmodels:InventoryViewModel">
+             x:DataType="viewmodels:InventoryViewModel"
+             x:Name="EquipmentPage">
 
     <ContentPage.BindingContext>
         <viewmodels:InventoryViewModel/>
@@ -113,6 +114,7 @@
                           RowHeight="80"
                           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                           RefreshCommand="{Binding RefreshCommand}"
+                          IsPullToRefreshEnabled="True"
                           CachingStrategy="RecycleElement">
                     
                     <ListView.Behaviors>
@@ -125,6 +127,15 @@
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:Item">
                             <ViewCell>
+                                
+                                <ViewCell.ContextActions>
+                                    <MenuItem 
+                                        Command="{Binding Source={x:Reference EquipmentPage}, Path=BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsDestructive="True"
+                                        Text="Delete"/>
+                                </ViewCell.ContextActions>
+                                
                                 <Grid Padding="10">
                                     <Frame Padding="5" BorderColor="Black" CornerRadius="20" HasShadow="True">
                                         <Grid ColumnDefinitions="50, *, 70">
