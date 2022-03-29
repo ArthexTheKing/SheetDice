@@ -11,11 +11,7 @@ namespace SheetDice.ViewModels
     public class InventoryViewModel : BaseViewModel
     {
         Item itemSelected;
-        public Item ItemSelected
-        {
-            get => itemSelected;
-            set => SetProperty(ref itemSelected, value);
-        }
+        public Item ItemSelected { get => itemSelected; set => SetProperty(ref itemSelected, value); }
         public ObservableRangeCollection<Item> Equipment { get; set; }
         public AsyncCommand<object> SelectedCommand { get; }
         public AsyncCommand AddItemCommand { get; }
@@ -59,8 +55,6 @@ namespace SheetDice.ViewModels
             Equipment.AddRange(items); 
             IsBusy = false;
         }
-
-        
 
         async Task Selected(object obj)
         {
