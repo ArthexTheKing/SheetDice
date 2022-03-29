@@ -10,7 +10,7 @@ namespace SheetDice.Services
     {
         private static SQLiteAsyncConnection db;
 
-        static async Task init()
+        private static async Task Init()
         {
             if (db != null)
                 return;
@@ -24,13 +24,13 @@ namespace SheetDice.Services
 
         public static async Task AddItem(Item item)
         {
-            await init();
+            await Init();
             await db.InsertAsync(item);
         }
 
         public static async Task RemoveItem(int id)
         {
-            await init();
+            await Init();
             await db.DeleteAsync<Item>(id);
         }
 
