@@ -44,7 +44,11 @@
                     </Frame>
 
                 </Grid>
-                
+
+                <Picker ItemsSource="{Binding ItemTypes}"/>
+
+
+
             </StackLayout>
         </Frame>
     </ContentPage.Content>
