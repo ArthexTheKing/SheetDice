@@ -1,4 +1,6 @@
-﻿namespace SheetDice.Models
+﻿using SQLite;
+
+namespace SheetDice.Models
 {
     public enum ItemType
     {
@@ -22,6 +24,7 @@
 
     public class Item
     {
+        [PrimaryKey, AutoIncrement]
         public string Name { get; set; }
         public string Description { get; set; }
         public int Value { get; set; }
