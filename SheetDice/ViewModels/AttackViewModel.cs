@@ -9,6 +9,7 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
 using Xamarin.Forms;
+using SheetDice.Services;
 
 namespace SheetDice.ViewModels
 {
@@ -18,7 +19,12 @@ namespace SheetDice.ViewModels
 
         public AsyncCommand RefreshComand { get; }
 
+        public AsyncCommand AddComand { get; }
+
+        public AsyncCommand RemoveComand { get; }
+
         public AsyncCommand<Attack> FavoriteComand { get; }
+        public AsyncCommand<Attack> SelectedComand { get; }
 
         public AttackViewModel()
         {
@@ -30,14 +36,21 @@ namespace SheetDice.ViewModels
             };
 
             RefreshComand = new AsyncCommand(Refresh);
-            FavoriteComand = new AsyncCommand<Attack>(Favorite);
         }
 
         async Task Refresh()
         {
             IsBusy = true;
             await Task.Delay(2000);
+            var attacks = await AttacksDatabase.GetAttack();
+            Attacks.AddRange(attacks);
             IsBusy = false;
+        }
+
+        async Task Remove(Attack attack)
+        {
+            await AttacksDatabase.RemoveAttack(attack.Id);
+            await Refresh();
         }
 
         Attack previouslySelected;
@@ -47,13 +60,12 @@ namespace SheetDice.ViewModels
             get => selectedAttack;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     Application.Current.MainPage.DisplayAlert("Selected", value.Name, "Ok");
                     previouslySelected = value;
                     value = null;
                 }
-
                 selectedAttack = value;
                 OnPropertyChanged();
             }

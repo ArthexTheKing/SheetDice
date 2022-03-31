@@ -6,6 +6,7 @@ namespace SheetDice.Models
 {
     public class Attack
     {
+        public int Id { get; }
         public string Name { get; set; }  //nome dell'arma
         public string Damage { get; set; } //danno dell'arma
         public string Type { get; set; } //tipo di danno
