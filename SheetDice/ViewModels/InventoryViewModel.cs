@@ -69,8 +69,8 @@ namespace SheetDice.ViewModels
             if (!(obj is Item item))
                 return;
             ItemSelected = null;
-            string description = this.TextDescription(item);
-            await Application.Current.MainPage.DisplayAlert(item.Name, description, "close");
+            await ItemDatabase.UpdateItem(item);
+            await Refresh();
         }
 
         private string EvaluateWeight()
@@ -81,7 +81,8 @@ namespace SheetDice.ViewModels
             return weight.ToString();
         }
 
-        private string TextDescription (Item item)
+        /*
+        private string TextDescription(Item item)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(item.Category.ToString()).Append("\n");
@@ -89,6 +90,6 @@ namespace SheetDice.ViewModels
             sb.Append("Quantity: ").Append(item.Quantity.ToString()).Append("\n");
             return sb.ToString();
         }
-
+        */
     }
 }

@@ -76,10 +76,12 @@
                           CachingStrategy="RecycleElement">
 
                     <ListView.Behaviors>
+
                         <xct:EventToCommandBehavior
                             EventName="ItemSelected"
                             Command="{Binding SelectedCommand}"
                             EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+
                     </ListView.Behaviors>
 
                     <ListView.ItemTemplate>
