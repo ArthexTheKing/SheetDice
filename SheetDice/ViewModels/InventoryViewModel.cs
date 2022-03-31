@@ -12,59 +12,8 @@ namespace SheetDice.ViewModels
     public class InventoryViewModel : BaseViewModel
     {
         Item itemSelected;
-        
-        string cp = "0";
-        string sp = "0";
-        string ep = "0";
-        string gp = "0";
-        string pp = "0";
         string weight = "0";
 
-        public string Cp
-        {
-            get => cp; 
-            set 
-            {
-                SetProperty(ref cp, value);
-                Weight = EvaluateWeight();  
-            }
-        }
-        public string Sp
-        {
-            get => sp;
-            set
-            {
-                SetProperty (ref sp, value);
-                Weight = EvaluateWeight();
-            }
-        }
-        public string Ep
-        {
-            get => ep;
-            set
-            {
-                SetProperty(ref ep, value);
-                Weight = EvaluateWeight();
-            }
-        }
-        public string Gp
-        {
-            get => gp;
-            set
-            {
-                SetProperty(ref gp, value);
-                Weight = EvaluateWeight();
-            }
-        }
-        public string Pp
-        {
-            get => pp;
-            set
-            {
-                SetProperty(ref pp, value);
-                Weight = EvaluateWeight();
-            }
-        }
         public Item ItemSelected 
         { 
             get => itemSelected; 
@@ -128,14 +77,10 @@ namespace SheetDice.ViewModels
         {
             double weight = 0;
             foreach (Item item in Equipment)
-                weight += item.Weight;
-            weight += double.Parse(Cp) * 0.02;
-            weight += double.Parse(Sp) * 0.02;
-            weight += double.Parse(Ep) * 0.02;
-            weight += double.Parse(Gp) * 0.02;
-            weight += double.Parse(Pp) * 0.02;
+                weight += item.Weight * item.Quantity;
             return weight.ToString();
         }
+
         private string TextDescription (Item item)
         {
             StringBuilder sb = new StringBuilder();

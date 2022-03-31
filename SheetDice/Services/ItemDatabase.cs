@@ -29,6 +29,12 @@ namespace SheetDice.Services
             await db.InsertAsync(item);
         }
 
+        public static async Task UpdateItem(Item item)
+        {
+            await Init();
+            await db.UpdateAsync(item);
+        }
+
         public static async Task RemoveItem(int id)
         {
             await Init();
