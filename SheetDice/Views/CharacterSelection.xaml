@@ -5,11 +5,18 @@
              x:DataType="viewmodels:CharacterSelectionViewModel"
              x:Class="SheetDice.Views.CharacterSelection"
              xmlns:models="clr-namespace:SheetDice.Models"
-             x:Name="CharacterSelectionPage">
+             x:Name="CharacterSelectionPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
 
     <ContentPage.BindingContext>
         <viewmodels:CharacterSelectionViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Characters}" 
@@ -20,7 +27,13 @@
                   RefreshControlColor="Red"
                   CachingStrategy="RecycleElement"
                   SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}">
-
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior
+                    EventName="ItemSelected"
+                    Command="{Binding SelectedCommand}"
+                    
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Character">
                     <ViewCell>

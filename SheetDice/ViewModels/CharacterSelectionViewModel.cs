@@ -13,6 +13,7 @@ namespace SheetDice.ViewModels
         public ObservableRangeCollection<Character> Characters { get; set; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand<Character> FavoriteCommand { get; }
+        public AsyncCommand<object> SelectedCommand { get; }
         public Command LoadMoreCommand { get; }
         public Command DelayLoadMoreCommand { get; }
         public Command ClearCommand { get; }
@@ -30,6 +31,7 @@ namespace SheetDice.ViewModels
 
             RefreshCommand = new AsyncCommand(Refresh);
             FavoriteCommand = new AsyncCommand<Character>(Favorite);
+            SelectedCommand = new AsyncCommand<object>(Selected);
             LoadMoreCommand = new Command(LoadMore);
             ClearCommand = new Command(Clear);
             DelayLoadMoreCommand = new Command(DelayLoadMore);
@@ -42,11 +44,11 @@ namespace SheetDice.ViewModels
                 return; 
             }
             await Application.Current.MainPage.DisplayAlert("Favorited", character.Name, "OK");
-        } 
+        }
 
-        Character previouslySelected;
         Character selectedCharacter;
-        public Character SelectedCharacter
+
+        public Character SelectedCharacterCV
         {
             get=> selectedCharacter;
             set
@@ -54,12 +56,28 @@ namespace SheetDice.ViewModels
                 if (value != null)
                 {
                     Application.Current.MainPage.DisplayAlert("Selected", value.Name, "OK");
-                    previouslySelected = value;
                     value = null;
                 }
                 selectedCharacter = value;
                 OnPropertyChanged();
             }
+        }
+
+        public Character SelectedCharacter
+        {
+            get => selectedCharacter;
+            set => SetProperty(ref selectedCharacter, value);
+        }
+
+        async Task Selected(object args)
+        {
+            var character = args as Character;
+            if (character == null)
+            {
+                return;
+            }
+            SelectedCharacter = null;
+            await Application.Current.MainPage.DisplayAlert("Selected", character.Name, "OK");
         }
 
 

@@ -16,7 +16,7 @@
             ItemSizingStrategy="MeasureAllItems"
             ItemsLayout="VerticalList"
             ItemsSource="{Binding Characters}"
-            SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedCharacterCV, Mode=TwoWay}"
             RemainingItemsThreshold="1"
             RemainingItemsThresholdReachedCommand="{Binding DelayLoadMoreCommand}"
             SelectionMode="Single">
