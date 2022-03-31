@@ -66,8 +66,7 @@ namespace SheetDice.ViewModels
 
         async Task Selected(object obj)
         {
-            if (!(obj is Item item))
-                return;
+            Item item = obj as Item;
             ItemSelected = null;
             await ItemDatabase.UpdateItem(item);
             await Refresh();
