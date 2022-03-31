@@ -1,4 +1,5 @@
 ﻿
+using SheetDice.Views;
 using Xamarin.Forms;
 
 namespace SheetDice
@@ -8,6 +9,8 @@ namespace SheetDice
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(ItemCreationPage), typeof(ItemCreationPage));
         }
     }
 }

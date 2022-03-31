@@ -5,15 +5,15 @@
              x:Class="SheetDice.Views.ItemCreationPage"
              x:DataType="viewmodels:ItemCreationViewModel"
              x:Name="Item">
-    
+
     <ContentPage.BindingContext>
         <viewmodels:ItemCreationViewModel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Create" Command="{Binding CreateCommand}"/>
-    </ContentPage.ToolbarItems>
-    
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackCommand}"/>
+    </Shell.BackButtonBehavior>
+
     <ContentPage.Content>
         <Frame BackgroundColor="LightGray" Padding="10">
             <StackLayout>
@@ -64,7 +64,14 @@
                     <Label Text="Magical Item" VerticalTextAlignment="Center" TextColor="Black"/>
                 </StackLayout>
 
+                <Frame BackgroundColor="White" Padding="10" Grid.Column="0">
+                    <StackLayout>
+                        <Label Text="Description" FontSize="12" TextColor="Black"/>
+                        <Editor AutoSize="TextChanges" Text="{Binding DescriptionEditor}"/>
+                    </StackLayout>
+                </Frame>
 
+                <Button BackgroundColor="White" Text="Save" Command="{Binding CreateCommand}"/>
 
             </StackLayout>
         </Frame>

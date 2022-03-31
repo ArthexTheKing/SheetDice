@@ -12,12 +12,18 @@ namespace SheetDice.ViewModels
 {
     public class ItemCreationViewModel : BaseViewModel
     {
-        string name;
+        private const string Titolo = "Discard";
+        private const string Descrizione = "Are you sure you want to discard this item";
+        private const string Accetto = "Keep editing";
+        private const string Rifiuto = "Discard changes";
+
+        string name = "";
         string weight = "0.0";
         string value = "0";
         string quantity = "1";
         ItemType categorySelected;
         bool isMagical = false;
+        string description = "";
 
         public string NameEntry { get => name; set => SetProperty(ref name, value); }
         public string WeightEntry { get => weight; set => SetProperty(ref weight, value); }
@@ -25,14 +31,25 @@ namespace SheetDice.ViewModels
         public string QuantityEntry { get => quantity; set => SetProperty(ref quantity, value); }
         public ItemType CategorySelected { get => categorySelected; set => SetProperty(ref categorySelected, value); }
         public bool IsMagicalCheck { get => isMagical; set => SetProperty(ref isMagical, value); }
+        public string DescriptionEditor { get => description; set => SetProperty(ref description, value); }
         public List<ItemType> ItemTypes { get; set; }
         public AsyncCommand CreateCommand { get; }
+        public AsyncCommand GoBackCommand { get; }
+
         public ItemCreationViewModel()
         {
             ItemTypes = new List<ItemType>();
             LoadEnumList();
 
             CreateCommand = new AsyncCommand(Create);
+            GoBackCommand = new AsyncCommand(GoBack);
+        }
+
+        async Task GoBack()
+        {
+            bool risposta = await Application.Current.MainPage.DisplayAlert(Titolo, Descrizione, Accetto, Rifiuto);
+            if (!risposta)
+                await Shell.Current.GoToAsync("..");
         }
 
         async Task Create()
@@ -51,10 +68,13 @@ namespace SheetDice.ViewModels
                 Quantity = int.Parse(QuantityEntry),
                 Category = CategorySelected,
                 IsMagical = IsMagicalCheck,
-                Description = ""
+                Description = DescriptionEditor,
+                IsEquipped = true
             };
 
             await ItemDatabase.AddItem(item);
+
+            await Shell.Current.GoToAsync("..");
         }
 
         private void LoadEnumList()

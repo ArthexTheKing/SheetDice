@@ -79,7 +79,6 @@
         <Tab>
             <ShellContent Title="blank" Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
             <ShellContent Title="Inventory" Route="InventoryPage" ContentTemplate="{DataTemplate local:InventoryPage}"/>
-            <ShellContent Title="Appoggio" Route="ItemCreationPage" ContentTemplate="{DataTemplate local:ItemCreationPage}"/>
         </Tab>
     </FlyoutItem>
 

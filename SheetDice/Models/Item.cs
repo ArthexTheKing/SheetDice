@@ -19,7 +19,8 @@ namespace SheetDice.Models
         Ring,
         Potion,
         Scroll,
-        WondrousItem
+        WondrousItem,
+        Wealth
     }
 
     public class Item
@@ -30,9 +31,10 @@ namespace SheetDice.Models
         public double Weight { get; set; }
         public int Value { get; set; }
         public int Quantity { get; set; }
-        public ItemType Category { get; set; } = ItemType.None;
+        public ItemType Category { get; set; }
         public bool IsMagical { get; set; }
         public string Description { get; set; }
+        public bool IsEquipped { get; set; }
         
     }
 }

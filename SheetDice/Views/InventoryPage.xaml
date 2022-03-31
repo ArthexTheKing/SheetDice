@@ -56,51 +56,9 @@
 
     <ContentPage.Content>
         <Grid RowDefinitions="120, *, Auto">
-            <StackLayout Margin="8"
-                         Grid.Row="0"
-                         Orientation="Horizontal"
-                         VerticalOptions="CenterAndExpand"
-                         HorizontalOptions="CenterAndExpand">
-
-                <Frame Style="{StaticResource MoneyFrame}">
-                    <StackLayout>
-                        <Label Text="cp" Style="{StaticResource MoneyNameLabel}"/>
-                        <Entry Style="{StaticResource MoneyEntry}"/>
-                    </StackLayout>
-                </Frame>
-
-                <Frame Style="{StaticResource MoneyFrame}">
-                    <StackLayout>
-                        <Label Text="sp" Style="{StaticResource MoneyNameLabel}"/>
-                        <Entry Style="{StaticResource MoneyEntry}"/>
-                    </StackLayout>
-                </Frame>
-
-                <Frame Style="{StaticResource MoneyFrame}">
-                    <StackLayout>
-                        <Label Text="ep" Style="{StaticResource MoneyNameLabel}"/>
-                        <Entry Style="{StaticResource MoneyEntry}"/>
-                    </StackLayout>
-                </Frame>
-
-                <Frame Style="{StaticResource MoneyFrame}">
-                    <StackLayout>
-                        <Label Text="gp" Style="{StaticResource MoneyNameLabel}"/>
-                        <Entry Style="{StaticResource MoneyEntry}"/>
-                    </StackLayout>
-                </Frame>
-
-                <Frame Style="{StaticResource MoneyFrame}">
-                    <StackLayout>
-                        <Label Text="pp" Style="{StaticResource MoneyNameLabel}"/>
-                        <Entry Style="{StaticResource MoneyEntry}"/>
-                    </StackLayout>
-                </Frame>
-
-            </StackLayout>
 
             <StackLayout Grid.Row="1">
-                
+
                 <Grid ColumnDefinitions="55, *, 85" HeightRequest="30">
                     <Label Grid.Column="0" Text="Equip" VerticalTextAlignment="End" HorizontalTextAlignment="End"/>
                     <Label Grid.Column="1" Text="Name" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
@@ -116,7 +74,7 @@
                           RefreshCommand="{Binding RefreshCommand}"
                           IsPullToRefreshEnabled="True"
                           CachingStrategy="RecycleElement">
-                    
+
                     <ListView.Behaviors>
                         <xct:EventToCommandBehavior
                             EventName="ItemSelected"
@@ -127,7 +85,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:Item">
                             <ViewCell>
-                                
+
                                 <ViewCell.ContextActions>
                                     <MenuItem 
                                         Command="{Binding Source={x:Reference EquipmentPage}, Path=BindingContext.RemoveCommand}"
@@ -135,13 +93,14 @@
                                         IsDestructive="True"
                                         Text="Delete"/>
                                 </ViewCell.ContextActions>
-                                
+
                                 <Grid Padding="10">
                                     <Frame Padding="5" BorderColor="Black" CornerRadius="20" HasShadow="True">
                                         <Grid ColumnDefinitions="50, *, 70">
                                             <CheckBox Color="Brown" 
                                                       Grid.Column="0"
-                                                      HorizontalOptions="Center"/>
+                                                      HorizontalOptions="Center"
+                                                      IsChecked="{Binding IsEquipped}"/>
                                             <Label Grid.Column="1" 
                                                    Text="{Binding Name}" 
                                                    FontSize="Large"
@@ -158,9 +117,36 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    
+
                 </ListView>
-                
+
+                <Frame Padding="10">
+                    <Grid ColumnDefinitions="*,*">
+
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Carrying load"/>
+                            <Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Weight}"/>
+                                    <Label Text="lbs."/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Carrying capacity"/>
+                            <Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="180"/>
+                                    <Label Text="lbs."/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                    </Grid>
+                </Frame>
+
+
             </StackLayout>
 
             <Frame Grid.Row="2" Padding="10">
