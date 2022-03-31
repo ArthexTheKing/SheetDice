@@ -15,31 +15,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="MoneyEntry" TargetType="Entry">
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="EndAndExpand"/>
-                <Setter Property="Placeholder" Value="0"/>
-                <Setter Property="Keyboard" Value="Numeric"/>
-                <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="MaxLength" Value="5"/>
-            </Style>
-
-            <Style x:Key="MoneyNameLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="TextColor" Value="SaddleBrown"/>
-            </Style>
-
-            <Style x:Key="MoneyFrame" TargetType="Frame">
-                <Setter Property="Padding" Value="5"/>
-                <Setter Property="BorderColor" Value="Gray"/>
-                <Setter Property="CornerRadius" Value="30"/>
-                <Setter Property="WidthRequest" Value="60"/>
-                <Setter Property="HeightRequest" Value="80"/>
-                <Setter Property="HasShadow" Value="True"/>
-            </Style>
-
             <Style x:Key="AddItemButton" TargetType="Button">
                 <Setter Property="Text" Value="+"/>
                 <Setter Property="FontSize" Value="Large"/>
@@ -47,6 +22,27 @@
                 <Setter Property="WidthRequest" Value="60"/>
                 <Setter Property="HeightRequest" Value="60"/>
                 <Setter Property="CornerRadius" Value="100"/>
+            </Style>
+
+            <Style x:Key="IsEquippedCheckBox" TargetType="CheckBox">
+                <Setter Property="Color" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="ItemNameLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="QuantityCounterButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="HeightRequest" Value="35"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="TextColor" Value="Black"/>
             </Style>
 
             <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
@@ -57,31 +53,28 @@
     <ContentPage.Content>
         <Grid RowDefinitions="*, Auto">
 
-            <StackLayout Grid.Row="0">
+            <StackLayout Grid.Row="0" Margin="20">
 
-                <Grid ColumnDefinitions="55, *, 85" HeightRequest="30">
-                    <Label Grid.Column="0" Text="Equip" VerticalTextAlignment="End" HorizontalTextAlignment="End"/>
-                    <Label Grid.Column="1" Text="Name" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
-                    <Label Grid.Column="2" Text="Quantity" VerticalTextAlignment="End" HorizontalTextAlignment="Start"/>
+                <Grid ColumnDefinitions="50,3,*,80" HeightRequest="30">
+                    <Label Grid.Column="0" Text="Equip" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
+                    <Label Grid.Column="2" Text="Name" VerticalTextAlignment="End" HorizontalTextAlignment="Start"/>
+                    <Label Grid.Column="3" Text="Quantity" VerticalTextAlignment="End" HorizontalTextAlignment="Center"/>
                 </Grid>
 
                 <ListView BackgroundColor="Transparent"
                           ItemsSource="{Binding Equipment}"
                           SelectedItem="{Binding ItemSelected, Mode=TwoWay}"
-                          SeparatorVisibility="None"
-                          RowHeight="80"
+                          SeparatorVisibility="Default"
                           IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                           RefreshCommand="{Binding RefreshCommand}"
                           IsPullToRefreshEnabled="True"
                           CachingStrategy="RecycleElement">
 
                     <ListView.Behaviors>
-
-                        <xct:EventToCommandBehavior
-                            EventName="ItemSelected"
-                            Command="{Binding SelectedCommand}"
+                        <xct:EventToCommandBehavior 
+                            EventName="ItemSelected" 
+                            Command="{Binding SelectedCommand}" 
                             EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
-
                     </ListView.Behaviors>
 
                     <ListView.ItemTemplate>
@@ -96,26 +89,24 @@
                                         Text="Delete"/>
                                 </ViewCell.ContextActions>
 
-                                <Grid Padding="10">
-                                    <Frame Padding="5" BorderColor="Black" CornerRadius="20" HasShadow="True">
-                                        <Grid ColumnDefinitions="50, *, 70">
-                                            <CheckBox Color="Brown" 
-                                                      Grid.Column="0"
-                                                      HorizontalOptions="Center"
-                                                      IsChecked="{Binding IsEquipped}"/>
-                                            <Label Grid.Column="1" 
-                                                   Text="{Binding Name}" 
-                                                   FontSize="Large"
-                                                   VerticalTextAlignment="Center"
-                                                   HorizontalTextAlignment="Start"/>
-                                            <Entry Grid.Column="2" 
-                                                   Text="{Binding Quantity}"
-                                                   HorizontalOptions="Start"
-                                                   WidthRequest="50"
-                                                   HorizontalTextAlignment="Center"/>
-                                        </Grid>
-                                    </Frame>
+                                <Grid ColumnDefinitions="50,4,*,80">
+                                    <CheckBox
+                                        Grid.Column="0"
+                                        Style="{StaticResource IsEquippedCheckBox}"
+                                        IsChecked="{Binding IsEquipped}"/>
+                                    <Label 
+                                        Grid.Column="2"
+                                        Style="{StaticResource ItemNameLabel}"
+                                        Text="{Binding Name}"/>
+                                    <Button 
+                                        Grid.Column="3" 
+                                        Style="{StaticResource QuantityCounterButton}"
+                                        Text="{Binding Quantity}"
+                                        Command="{Binding Source={x:Reference EquipmentPage}, Path=BindingContext.ModifyQuantityCommand}"
+                                        CommandParameter="{Binding .}"/>
                                 </Grid>
+                                    
+                                
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

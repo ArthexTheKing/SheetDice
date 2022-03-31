@@ -30,6 +30,7 @@ namespace SheetDice.ViewModels
         public AsyncCommand AddItemCommand { get; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand<Item> RemoveCommand { get; }
+        public AsyncCommand<Item> ModifyQuantityCommand { get; }
 
         public InventoryViewModel()
         {
@@ -39,6 +40,23 @@ namespace SheetDice.ViewModels
             AddItemCommand = new AsyncCommand(AddItem);
             RefreshCommand = new AsyncCommand(Refresh);
             RemoveCommand = new AsyncCommand<Item>(RemoveItem);
+            ModifyQuantityCommand = new AsyncCommand<Item>(ModifyQuantity);
+        }
+
+        async Task ModifyQuantity(Item item)
+        {
+            string quantity;
+            do
+            {
+                quantity = await Application.Current.MainPage.DisplayPromptAsync("Modifica Quantità", "Quanti ne hai?", initialValue: item.Quantity.ToString());
+                if (string.IsNullOrEmpty(quantity))
+                    await Application.Current.MainPage.DisplayAlert("Errore", "Non puoi impostare una quantità nulla", "ok");
+            }
+            while(string.IsNullOrEmpty(quantity));
+           
+            item.Quantity = int.Parse(quantity);
+            await ItemDatabase.UpdateItem(item);
+            await Refresh();
         }
 
         async Task AddItem()
@@ -66,10 +84,10 @@ namespace SheetDice.ViewModels
 
         async Task Selected(object obj)
         {
-            Item item = obj as Item;
+            if (!(obj is Item item))
+                return;
             ItemSelected = null;
-            await ItemDatabase.UpdateItem(item);
-            await Refresh();
+            await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Ok");
         }
 
         private string EvaluateWeight()
@@ -80,7 +98,6 @@ namespace SheetDice.ViewModels
             return weight.ToString();
         }
 
-        /*
         private string TextDescription(Item item)
         {
             StringBuilder sb = new StringBuilder();
@@ -89,6 +106,6 @@ namespace SheetDice.ViewModels
             sb.Append("Quantity: ").Append(item.Quantity.ToString()).Append("\n");
             return sb.ToString();
         }
-        */
+        
     }
 }
