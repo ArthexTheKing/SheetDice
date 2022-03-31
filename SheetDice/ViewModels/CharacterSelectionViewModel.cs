@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
+using SheetDice.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
@@ -17,24 +18,20 @@ namespace SheetDice.ViewModels
         public Command LoadMoreCommand { get; }
         public Command DelayLoadMoreCommand { get; }
         public Command ClearCommand { get; }
+        public AsyncCommand AddCommand { get; }
+        public AsyncCommand<Character> RemoveCommand { get; }
+
 
 
         public CharacterSelectionViewModel()
         {
-            Characters = new ObservableRangeCollection<Character>
-            {
-                new Character(){Name = "Lilia"},
-                new Character(){Name = "Albert"},
-                new Character(){Name = "Baldwin"}
-            };
-
+            Characters = new ObservableRangeCollection<Character>();
 
             RefreshCommand = new AsyncCommand(Refresh);
             FavoriteCommand = new AsyncCommand<Character>(Favorite);
             SelectedCommand = new AsyncCommand<object>(Selected);
-            LoadMoreCommand = new Command(LoadMore);
-            ClearCommand = new Command(Clear);
-            DelayLoadMoreCommand = new Command(DelayLoadMore);
+            AddCommand = new AsyncCommand(Add);
+            RemoveCommand = new AsyncCommand<Character>(Remove);
 
         }
 
@@ -84,35 +81,24 @@ namespace SheetDice.ViewModels
         async Task Refresh()
         {
             IsBusy = true;
-            await Task.Delay(1000);
+            await Task.Delay(2000);
+            var characters = await CharacterDatabase.GetCharacter();
             Characters.Clear();
-            LoadMore();
+            Characters.AddRange(characters);
             IsBusy = false;
         }
 
-        void LoadMore()
+        async Task Add()
         {
-            if (Characters.Count >= 20)
-                return;
-
-            Characters.Add(new Character() { Name = "Lilia" });
-            Characters.Add(new Character() { Name = "Albert" });
-            Characters.Add(new Character() { Name = "Baldwin" });
-
+            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Inserire nome", "Ok");
+            await CharacterDatabase.AddCharacter(name);
+            await Refresh();
         }
 
-        void DelayLoadMore()
+        async Task Remove(Character character)
         {
-            if (Characters.Count <= 10)
-                return;
-
-            LoadMore();
-        }
-
-
-        void Clear()
-        {
-            Characters.Clear();
+            await CharacterDatabase.RemoveCharacter(character.Id);
+            await Refresh();
         }
     }
 }
