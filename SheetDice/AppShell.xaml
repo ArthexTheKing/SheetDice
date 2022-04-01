@@ -79,6 +79,7 @@
         <Tab>
             <ShellContent Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
             <ShellContent Route="Principale" ContentTemplate="{DataTemplate local:Page1}" />
+            <ShellContent Route="Schifo" ContentTemplate="{DataTemplate local:Schifo}"/>
         </Tab>
     </FlyoutItem>
 

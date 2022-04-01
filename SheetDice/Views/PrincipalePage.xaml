@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:SheetDice.ViewModels" 
              x:DataType="viewmodels:AttackViewModel"
              xmlns:models="clr-namespace:SheetDice.Models" 
-             xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="SheetDice.Views.Page1"
              x:Name="PrincipalePage">
 
@@ -37,6 +37,7 @@
                 <Setter Property="HeightRequest" Value="60"></Setter>
                 <Setter Property="CornerRadius" Value="100"></Setter>
             </Style>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -123,8 +124,15 @@
                       SeparatorColor="Black"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                      RefreshCommand="{Binding RefreshComand}"
+                      RefreshCommand="{Binding RefreshCommand}"
                       RefreshControlColor="DeepSkyBlue">
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                    EventName="ItemSelected"
+                    Command="{Binding SelectedCommand}"
+
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Attack">
                         <ViewCell>
@@ -132,7 +140,11 @@
                                 <MenuItem Text="Favourite" 
                                           Command="{Binding Source={x:Reference PrincipalePage}, Path=BindingContext.FavoriteComand}" 
                                           CommandParameter="{Binding .}"/>
-                                <MenuItem Text="Delete" IsDestructive="True"/>
+                                <MenuItem 
+                                        Command="{Binding Source={x:Reference PrincipalePage}, Path=BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsDestructive="True"
+                                        Text="Delete"/>
                             </ViewCell.ContextActions>
                             <Grid>
                                 <Grid.RowDefinitions>

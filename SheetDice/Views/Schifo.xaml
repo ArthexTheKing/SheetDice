@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SheetDice.Views.Schifo"
+              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:models="clr-namespace:SheetDice.Models" 
+             x:DataType="viewmodels:AttackViewModel"
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels" 
+             x:Name="SchifoPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AttackViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ListView ItemsSource="{Binding Attacks}" 
+                  HasUnevenRows="True" 
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  RefreshControlColor="Red"
+                  CachingStrategy="RecycleElement"
+                  SelectedItem="{Binding SelectedAttack, Mode=TwoWay}">
+        <ListView.Behaviors>
+            <xct:EventToCommandBehavior
+                    EventName="ItemSelected"
+                    Command="{Binding SelectedCommand}"
+
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+        </ListView.Behaviors>
+        
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="models:Attack">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Favorite" 
+                                      Command="{Binding Source={x:Reference SchifoPage},Path=BindingContext.FavoriteCommand}"
+                                      CommandParameter="{Binding .}"/>
+                        <MenuItem 
+                                        Command="{Binding Source={x:Reference SchifoPage}, Path=BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsDestructive="True"
+                                        Text="Delete"/>
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20">
+                            <StackLayout>
+                                <Label VerticalOptions="Center" Text="{Binding Name}" FontSize="Large"/>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+</ContentPage>
