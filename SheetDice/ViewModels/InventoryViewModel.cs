@@ -36,6 +36,8 @@ namespace SheetDice.ViewModels
         {
             Equipment = new ObservableRangeCollection<Item>();
 
+            Task task = LoadInventory();
+
             SelectedCommand = new AsyncCommand<object>(Selected);
             AddItemCommand = new AsyncCommand(AddItem);
             RefreshCommand = new AsyncCommand(Refresh);
@@ -74,12 +76,17 @@ namespace SheetDice.ViewModels
         async Task Refresh()
         {
             IsBusy = true;
-            await Task.Delay(500);
+            await Task.Delay(2000);
             Equipment.Clear();
+            await LoadInventory();
+            IsBusy = false;
+        }
+
+        private async Task LoadInventory()
+        {
             var items = await ItemDatabase.GetItems();
             Equipment.AddRange(items);
             Weight = EvaluateWeight();
-            IsBusy = false;
         }
 
         async Task Selected(object obj)
