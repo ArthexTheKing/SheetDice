@@ -1,6 +1,7 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
+using SheetDice.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Xamarin.Forms;
 
 namespace SheetDice.ViewModels
 {
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemModifyViewModel : BaseViewModel
     {
         private const string Titolo = "Discard";
@@ -22,6 +24,13 @@ namespace SheetDice.ViewModels
         ItemType categorySelected;
         bool isMagical = false;
         string description = "";
+
+        string itemId;
+        public string ItemId 
+        { 
+            get => itemId;
+            set => SetProperty(ref itemId, value);
+        }
 
         public string NameEntry { get => name; set => SetProperty(ref name, value); }
         public string WeightEntry { get => weight; set => SetProperty(ref weight, value); }

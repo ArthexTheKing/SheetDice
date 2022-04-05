@@ -97,7 +97,7 @@ namespace SheetDice.ViewModels
             bool risposta = await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Ok", "Modifica");
             if(!risposta)
             {
-                var route = $"{nameof(ItemModifyPage)}";
+                var route = $"{nameof(ItemModifyPage)}?ItemId={item.Id}";
                 await Shell.Current.GoToAsync(route);
             }
         }

@@ -6,7 +6,7 @@
              x:DataType="viewmodels:ItemModifyViewModel">
     
     <ContentPage.BindingContext>
-        <viewmodels:ItemCreationViewModel/>
+        <viewmodels:ItemModifyViewModel/>
     </ContentPage.BindingContext>
 
     <Shell.BackButtonBehavior>
