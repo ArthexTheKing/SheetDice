@@ -43,6 +43,9 @@
                 <Setter Property="WidthRequest" Value="60"/>
                 <Setter Property="FontSize" Value="13"/>
                 <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="BorderColor" Value="Gray"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="CornerRadius" Value="5"/>
             </Style>
 
             <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
