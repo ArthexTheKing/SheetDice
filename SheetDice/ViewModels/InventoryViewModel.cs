@@ -94,7 +94,11 @@ namespace SheetDice.ViewModels
             if (!(obj is Item item))
                 return;
             ItemSelected = null;
-            await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Ok");
+            bool risposta = await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Ok", "Modifica");
+            if(!risposta)
+            {
+                
+            }
         }
 
         private string EvaluateWeight()

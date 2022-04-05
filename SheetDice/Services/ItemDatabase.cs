@@ -48,5 +48,12 @@ namespace SheetDice.Services
             return items;
         }
 
+        public static async Task<Item> GetItem(int id)
+        {
+            await Init();
+            var item = await db.GetAsync<Item>(id);
+            return item;
+        }
+
     }
 }
