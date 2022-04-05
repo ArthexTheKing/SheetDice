@@ -29,7 +29,7 @@
     <EmbeddedResource Update="Views\BlankPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CharacterSelectionCV.xaml">
+    <EmbeddedResource Update="Views\CharacterDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Help.xaml">

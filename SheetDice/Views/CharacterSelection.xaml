@@ -42,9 +42,6 @@
                 <DataTemplate x:DataType="models:Character">
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="Favorite" 
-                                      Command="{Binding Source={x:Reference CharacterSelectionPage},Path=BindingContext.FavoriteCommand}"
-                                      CommandParameter="{Binding .}"/>
                             <MenuItem 
                                         Command="{Binding Source={x:Reference CharacterSelectionPage}, Path=BindingContext.RemoveCommand}"
                                         CommandParameter="{Binding .}"
@@ -55,6 +52,7 @@
                             <Frame CornerRadius="20">
                                 <StackLayout>
                                     <Label VerticalOptions="Center" Text="{Binding Name}" FontSize="Large"/>
+                                    <Label VerticalOptions="Center" Text="{Binding Classe}" FontSize="Small"/>
                                 </StackLayout>
                             </Frame>
                         </Grid>

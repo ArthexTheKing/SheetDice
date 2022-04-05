@@ -1,45 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SheetDice.Views.CharacterCreation">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
+             x:Class="SheetDice.Views.CharacterCreation"
+             x:DataType="viewmodels:AddCharacterViewModel"
+             Shell.PresentationMode="Modal">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddCharacterViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Creazione del personaggio"
-                HorizontalOptions="CenterAndExpand" />
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="A." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="NomePG" Placeholder="Nome del personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="B." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="LivelloPG" Placeholder="Livello del personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="C." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="AllineamentoPG" Placeholder="Allineamento personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="D." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="ClassePG" Placeholder="Classe personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="E." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="SottoclassePG" Placeholder="Sottoclasse personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="F." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="RazzaPG" Placeholder="Razza personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="G." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="SottorazzaPG" Placeholder="Sottorazza personaggio" Grid.Column="1"/>
-            </Grid>
-            <Grid ColumnDefinitions="*,300,*">
-                <Label Text="H." Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Entry x:Name="BackgroundPG" Placeholder="Background personaggio" Grid.Column="1"/>
-            </Grid>
-            
-            
+        <StackLayout Padding="20">
+            <Label Text="Name:"/>
+            <Entry Text="{Binding Name}"/>
+            <Label Text="Class:"/>
+            <Entry Text="{Binding Classe}"/>
+            <Label Text="Level:"/>
+            <Entry Text="{Binding Level}"/>
+            <Label Text="Alignement:"/>
+            <Entry Text="{Binding Alignement}"/>
+            <Label Text="Race:"/>
+            <Entry Text="{Binding Race}"/>
+            <Label Text="Background:"/>
+            <Entry Text="{Binding Background}"/>
+            <Label Text="Subclass:"/>
+            <Entry Text="{Binding Subclass}"/>
+            <Label Text="Subrace:"/>
+            <Entry Text="{Binding Subrace}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+
+            <Button Text="Save" 
+                    Padding="20,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Command="{Binding SaveCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

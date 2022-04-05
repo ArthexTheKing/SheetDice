@@ -26,12 +26,19 @@ namespace SheetDice.Services
             await db.CreateTableAsync<Character>();
         }
 
-        public static async Task AddCharacter(string name)
+        public static async Task AddCharacter(string name, string classe, string level, string alignement, string race, string background, string subclass, string subrace)
         {
             await Init();
             var character = new Character
             {
-                Name = name
+                Name = name,
+                Classe = classe,
+                Level = level,
+                Alignment = alignement,
+                Race = race,
+                Background = background,
+                Subclass = subclass,
+                Subrace = subrace
             };
             await db.InsertAsync(character);
         }
@@ -47,6 +54,16 @@ namespace SheetDice.Services
             await Init();
 
             var character = await db.Table<Character>().ToListAsync();
+            return character;
+        }
+
+        public static async Task<Character> GetCharacterObject(int id)
+        {
+            await Init();
+
+            var character = await db.Table<Character>()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             return character;
         }
     }

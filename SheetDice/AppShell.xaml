@@ -109,14 +109,6 @@
         <ShellContent Route="CharacterSelection" ContentTemplate="{DataTemplate local:CharacterSelection}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Character Selection CV">
-        <ShellContent Route="CharacterSelection CV" ContentTemplate="{DataTemplate local:CharacterSelectionCV}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Character Creation">
-        <ShellContent Route="CharacterCreation" ContentTemplate="{DataTemplate local:CharacterCreation}" />
-    </FlyoutItem>
-
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid BackgroundColor="{StaticResource Primary}"

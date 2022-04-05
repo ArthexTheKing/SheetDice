@@ -2,6 +2,7 @@
 using MvvmHelpers.Commands;
 using SheetDice.Models;
 using SheetDice.Services;
+using SheetDice.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Command = MvvmHelpers.Commands.Command;
@@ -13,7 +14,6 @@ namespace SheetDice.ViewModels
     {
         public ObservableRangeCollection<Character> Characters { get; set; }
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand<Character> FavoriteCommand { get; }
         public AsyncCommand<object> SelectedCommand { get; }
         public Command LoadMoreCommand { get; }
         public Command DelayLoadMoreCommand { get; }
@@ -28,37 +28,13 @@ namespace SheetDice.ViewModels
             Characters = new ObservableRangeCollection<Character>();
 
             RefreshCommand = new AsyncCommand(Refresh);
-            FavoriteCommand = new AsyncCommand<Character>(Favorite);
             SelectedCommand = new AsyncCommand<object>(Selected);
             AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Character>(Remove);
 
         }
 
-        async Task Favorite(Character character)
-        {
-            if(character == null) {
-                return; 
-            }
-            await Application.Current.MainPage.DisplayAlert("Favorited", character.Name, "OK");
-        }
-
         Character selectedCharacter;
-
-        public Character SelectedCharacterCV
-        {
-            get=> selectedCharacter;
-            set
-            {
-                if (value != null)
-                {
-                    Application.Current.MainPage.DisplayAlert("Selected", value.Name, "OK");
-                    value = null;
-                }
-                selectedCharacter = value;
-                OnPropertyChanged();
-            }
-        }
 
         public Character SelectedCharacter
         {
@@ -73,8 +49,9 @@ namespace SheetDice.ViewModels
             {
                 return;
             }
+            var route = $"{nameof(CharacterDetail)}?CharacterID={character.Id}";
+            await Shell.Current.GoToAsync(route);
             SelectedCharacter = null;
-            await Application.Current.MainPage.DisplayAlert("Selected", character.Name, "OK");
         }
 
 
@@ -90,9 +67,8 @@ namespace SheetDice.ViewModels
 
         async Task Add()
         {
-            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Inserire nome", "Ok");
-            await CharacterDatabase.AddCharacter(name);
-            await Refresh();
+            var route = $"{nameof(CharacterCreation)}";
+            await Shell.Current.GoToAsync(route);
         }
 
         async Task Remove(Character character)
