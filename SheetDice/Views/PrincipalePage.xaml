@@ -170,7 +170,7 @@
             </ListView>
         </StackLayout>
         <StackLayout Grid.Column="0" Grid.Row="7">
-                <Button Style="{StaticResource PrincipalButton}"></Button>
+            <Button Style="{StaticResource PrincipalButton}" Command="{Binding AddCommand}"></Button>
         </StackLayout>
     </Grid>
 </ContentPage>

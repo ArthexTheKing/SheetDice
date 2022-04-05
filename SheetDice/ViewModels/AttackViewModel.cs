@@ -22,7 +22,7 @@ namespace SheetDice.ViewModels
 
         public AsyncCommand AddCommand { get; }
 
-        public AsyncCommand RemoveCommand { get; }
+        public AsyncCommand<Attack> RemoveCommand { get; }
 
         public AsyncCommand<Attack> FavoriteCommand { get; }
         public AsyncCommand<object> SelectedCommand { get; }
@@ -31,14 +31,13 @@ namespace SheetDice.ViewModels
         {
             Attacks = new ObservableRangeCollection<Attack>
             {
-                new Attack() { Name = "Broadsword", Damage = "2d6", Type = "Slashing"},
-                new Attack() { Name = "Spear", Damage = "1d6", Type = "Piercing"},
-                new Attack() { Name = "Dagger", Damage = "1d4", Type = "Piercing"}
             };
 
             RefreshCommand = new AsyncCommand(Refresh);
             SelectedCommand = new AsyncCommand<object>(Selected);
             FavoriteCommand = new AsyncCommand<Attack>(Favorite);
+            AddCommand = new AsyncCommand(Add);
+            RemoveCommand = new AsyncCommand<Attack>(Remove);
         }
 
         async Task Refresh()
@@ -49,6 +48,15 @@ namespace SheetDice.ViewModels
             Attacks.Clear();
             Attacks.AddRange(attacks);
             IsBusy = false;
+        }
+
+        async Task Add()
+        {
+            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Attack name");
+            var type = await App.Current.MainPage.DisplayPromptAsync("Type", "Attack type");
+            var damage = await App.Current.MainPage.DisplayPromptAsync("Damage", "Damage of the attack");
+            await AttacksDatabase.AddAttack(name, type, damage);
+            await Refresh();
         }
 
         async Task Remove(Attack attack)
@@ -78,8 +86,8 @@ namespace SheetDice.ViewModels
         {
             if (attack == null)
                 return;
-            await Application.Current.MainPage.DisplayAlert("Favorite", attack.Name, "Ok");
-        }
 
+            await Application.Current.MainPage.DisplayAlert("Selected", attack.Name, "Ok");
+        }
     }
 } 
