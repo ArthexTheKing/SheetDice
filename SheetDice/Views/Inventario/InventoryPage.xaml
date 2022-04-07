@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels.Inventario" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
              xmlns:models="clr-namespace:SheetDice.Models"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="SheetDice.Views.InventoryPage"
+             x:Class="SheetDice.Views.Inventario.InventoryPage"
              x:DataType="viewmodels:InventoryViewModel"
              x:Name="EquipmentPage">
-
+    
     <ContentPage.BindingContext>
         <viewmodels:InventoryViewModel/>
     </ContentPage.BindingContext>
@@ -108,8 +108,8 @@
                                         Command="{Binding Source={x:Reference EquipmentPage}, Path=BindingContext.ModifyQuantityCommand}"
                                         CommandParameter="{Binding .}"/>
                                 </Grid>
-                                    
-                                
+
+
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

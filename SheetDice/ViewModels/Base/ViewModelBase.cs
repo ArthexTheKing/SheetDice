@@ -12,5 +12,6 @@ namespace SheetDice.ViewModels.Base
 
         [ObservableProperty]
         private string title = string.Empty;
+
     }
 }

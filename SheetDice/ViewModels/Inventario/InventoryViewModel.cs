@@ -4,8 +4,6 @@ using SheetDice.Models;
 using SheetDice.Services;
 using SheetDice.ViewModels.Base;
 using SheetDice.Views;
-using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -19,6 +17,7 @@ namespace SheetDice.ViewModels.Inventario
 
         public InventoryViewModel()
         {
+            Title = "EquipmentPage";
             Equipment = new ObservableRangeCollection<Item>();
             _ = LoadInventory();
         }

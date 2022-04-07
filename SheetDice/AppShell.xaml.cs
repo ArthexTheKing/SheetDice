@@ -12,6 +12,7 @@ namespace SheetDice
 
             Routing.RegisterRoute(nameof(ItemCreationPage), typeof(ItemCreationPage));
             Routing.RegisterRoute(nameof(ItemModifyPage), typeof(ItemModifyPage));
+            
         }
     }
 }
