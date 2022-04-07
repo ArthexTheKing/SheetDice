@@ -25,7 +25,7 @@ namespace SheetDice.ViewModels
         private Item itemSelected;
 
         [ObservableProperty]
-        private string weight;
+        private string weight = "0";
 
         [ICommand]
         private async Task ModifyQuantity(Item item)
@@ -103,5 +103,6 @@ namespace SheetDice.ViewModels
             sb.Append("Quantity: ").Append(item.Quantity.ToString()).Append("\n");
             return sb.ToString();
         } 
+   
     }
 }
