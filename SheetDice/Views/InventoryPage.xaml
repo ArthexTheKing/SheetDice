@@ -76,7 +76,7 @@
                     <ListView.Behaviors>
                         <xct:EventToCommandBehavior 
                             EventName="ItemSelected" 
-                            Command="{Binding SelectedCommand}" 
+                            Command="{Binding SelectedItemCommand}" 
                             EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
                     </ListView.Behaviors>
 
@@ -86,7 +86,7 @@
 
                                 <ViewCell.ContextActions>
                                     <MenuItem 
-                                        Command="{Binding Source={x:Reference EquipmentPage}, Path=BindingContext.RemoveCommand}"
+                                        Command="{Binding Source={x:Reference EquipmentPage}, Path=BindingContext.RemoveItemCommand}"
                                         CommandParameter="{Binding .}"
                                         IsDestructive="True"
                                         Text="Delete"/>

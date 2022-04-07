@@ -1,79 +1,77 @@
-﻿using MvvmHelpers;
-using MvvmHelpers.Commands;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SheetDice.Models;
 using SheetDice.Services;
+using SheetDice.ViewModels.Base;
 using SheetDice.Views;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace SheetDice.ViewModels
 {
-    public class InventoryViewModel : BaseViewModel
+    public partial class InventoryViewModel : ViewModelBase
     {
-        Item itemSelected;
-        string weight = "0";
-
-        public Item ItemSelected 
-        { 
-            get => itemSelected; 
-            set => SetProperty(ref itemSelected, value); 
-        }
-        public string Weight 
-        { 
-            get => weight; 
-            set => SetProperty(ref weight, value); 
-        }
-        
         public ObservableRangeCollection<Item> Equipment { get; set; }
-        public AsyncCommand<object> SelectedCommand { get; }
-        public AsyncCommand AddItemCommand { get; }
-        public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand<Item> RemoveCommand { get; }
-        public AsyncCommand<Item> ModifyQuantityCommand { get; }
 
         public InventoryViewModel()
         {
             Equipment = new ObservableRangeCollection<Item>();
-
-            Task task = LoadInventory();
-
-            SelectedCommand = new AsyncCommand<object>(Selected);
-            AddItemCommand = new AsyncCommand(AddItem);
-            RefreshCommand = new AsyncCommand(Refresh);
-            RemoveCommand = new AsyncCommand<Item>(RemoveItem);
-            ModifyQuantityCommand = new AsyncCommand<Item>(ModifyQuantity);
+            _ = LoadInventory();
         }
 
-        async Task ModifyQuantity(Item item)
+        [ObservableProperty]
+        private Item itemSelected;
+
+        [ObservableProperty]
+        private string weight;
+
+        [ICommand]
+        private async Task ModifyQuantity(Item item)
         {
-            string quantity;
-            do
+            string quantity = await Application.Current.MainPage.DisplayPromptAsync("Modifica Quantità", "Quanti ne hai?", initialValue: item.Quantity.ToString());
+            if (quantity == null || quantity.Equals(item.Quantity.ToString()))
             {
-                quantity = await Application.Current.MainPage.DisplayPromptAsync("Modifica Quantità", "Quanti ne hai?", initialValue: item.Quantity.ToString());
-                if (string.IsNullOrEmpty(quantity))
-                    await Application.Current.MainPage.DisplayAlert("Errore", "Non puoi impostare una quantità nulla", "ok");
+                return;
             }
-            while(string.IsNullOrEmpty(quantity));
-           
             item.Quantity = int.Parse(quantity);
             await ItemDatabase.UpdateItem(item);
             await Refresh();
         }
 
-        async Task AddItem()
+        [ICommand]
+        private async Task AddItem()
         {
             var route = $"{nameof(ItemCreationPage)}";
             await Shell.Current.GoToAsync(route);
         }
 
-        async Task RemoveItem(Item item)
+        [ICommand]
+        private async Task RemoveItem(Item item)
         {
             await ItemDatabase.RemoveItem(item.Id);
             await Refresh();
         }
 
-        async Task Refresh()
+        [ICommand]
+        private async Task SelectedItem(object obj)
+        {
+            if (obj is not Item item)
+            {
+                return;
+            }
+            ItemSelected = null;
+            bool risposta = await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Modifica", "Ok");
+            if (risposta)
+            {
+                var route = $"{nameof(ItemModifyPage)}?ItemId={item.Id}";
+                await Shell.Current.GoToAsync(route);
+            }
+        }
+
+        [ICommand]
+        private async Task Refresh()
         {
             IsBusy = true;
             await Task.Delay(2000);
@@ -89,19 +87,6 @@ namespace SheetDice.ViewModels
             Weight = EvaluateWeight();
         }
 
-        async Task Selected(object obj)
-        {
-            if (!(obj is Item item))
-                return;
-            ItemSelected = null;
-            bool risposta = await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Ok", "Modifica");
-            if(!risposta)
-            {
-                var route = $"{nameof(ItemModifyPage)}?ItemId={item.Id}";
-                await Shell.Current.GoToAsync(route);
-            }
-        }
-
         private string EvaluateWeight()
         {
             double weight = 0;
@@ -112,12 +97,11 @@ namespace SheetDice.ViewModels
 
         private string TextDescription(Item item)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.Append(item.Category.ToString()).Append("\n");
             sb.Append("Weight: ").Append(item.Weight.ToString()).Append("\n");
             sb.Append("Quantity: ").Append(item.Quantity.ToString()).Append("\n");
             return sb.ToString();
-        }
-        
+        } 
     }
 }
