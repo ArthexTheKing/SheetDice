@@ -1,7 +1,6 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SheetDice.Models;
-using SheetDice.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
