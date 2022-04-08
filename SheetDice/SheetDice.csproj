@@ -27,7 +27,7 @@
     <EmbeddedResource Update="Views\Inventario\InventoryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ItemCreationPage.xaml">
+    <EmbeddedResource Update="Views\Inventario\ItemCreationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ItemModifyPage.xaml">
