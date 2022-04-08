@@ -18,12 +18,17 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Compile Update="Views\CharacterSelection.xaml.cs">
+      <DependentUpon>CharacterSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CharacterCreation.xaml.cs">
+      <DependentUpon>CharacterCreation.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     
 	  <EmbeddedResource Update="Views\BlankPage.xaml">
-      
 		  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
 
@@ -31,12 +36,37 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     
-	<EmbeddedResource Update="Views\Inventario\ItemCreationPage.xaml">
+	  <EmbeddedResource Update="Views\Inventario\ItemCreationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    
     <EmbeddedResource Update="Views\Inventario\ItemModifyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-	  
+    
+    <EmbeddedResource Update="Views\AboutUs.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
+    <EmbeddedResource Update="Views\CharacterDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
+    <EmbeddedResource Update="Views\Help.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
+    <EmbeddedResource Update="Views\Opzioni.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
+    <EmbeddedResource Update="Views\CharacterSelection.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
+    <EmbeddedResource Update="Views\CharacterCreation.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
   </ItemGroup>
 </Project>
