@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SheetDice.Views
+namespace SheetDice.Views.Inventario
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemModifyPage : ContentPage

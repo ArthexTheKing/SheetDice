@@ -4,6 +4,7 @@ using SheetDice.Models;
 using SheetDice.Services;
 using SheetDice.ViewModels.Base;
 using SheetDice.Views;
+using SheetDice.Views.Inventario;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.ObjectModel;

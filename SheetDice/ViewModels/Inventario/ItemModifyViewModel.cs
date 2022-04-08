@@ -1,15 +1,15 @@
-﻿using MvvmHelpers;
-using MvvmHelpers.Commands;
+﻿using MvvmHelpers.Commands;
 using SheetDice.Models;
+using SheetDice.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SheetDice.ViewModels
+namespace SheetDice.ViewModels.Inventario
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemModifyViewModel : BaseViewModel
+    public partial class ItemModifyViewModel : ViewModelBase
     {
         private const string Titolo = "Discard";
         private const string Descrizione = "Are you sure you want to discard this item";
@@ -25,8 +25,8 @@ namespace SheetDice.ViewModels
         string description = "";
 
         string itemId;
-        public string ItemId 
-        { 
+        public string ItemId
+        {
             get => itemId;
             set => SetProperty(ref itemId, value);
         }
@@ -38,7 +38,7 @@ namespace SheetDice.ViewModels
         public ItemType CategorySelected { get => categorySelected; set => SetProperty(ref categorySelected, value); }
         public bool IsMagicalCheck { get => isMagical; set => SetProperty(ref isMagical, value); }
         public string DescriptionEditor { get => description; set => SetProperty(ref description, value); }
-        
+
         public List<ItemType> ItemTypes { get; set; }
         public AsyncCommand SaveCommand { get; }
         public AsyncCommand GoBackCommand { get; }
@@ -54,7 +54,7 @@ namespace SheetDice.ViewModels
 
         async Task GoBack()
         {
-            bool risposta = await Application.Current.MainPage.DisplayAlert(Titolo, Descrizione, Accetto, Rifiuto);
+            bool risposta = await Application.Current.MainPage.DisplayAlert("Discard", "Are you sure you want to discard this item", "Keep editing", "Discard changes");
             if (!risposta)
                 await Shell.Current.GoToAsync("..");
         }
@@ -69,5 +69,6 @@ namespace SheetDice.ViewModels
             foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
                 ItemTypes.Add(itemType);
         }
+
     }
 }

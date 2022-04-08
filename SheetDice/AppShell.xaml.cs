@@ -1,5 +1,6 @@
 ﻿
 using SheetDice.Views;
+using SheetDice.Views.Inventario;
 using Xamarin.Forms;
 
 namespace SheetDice

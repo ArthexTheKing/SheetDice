@@ -30,7 +30,7 @@
     <EmbeddedResource Update="Views\Inventario\ItemCreationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ItemModifyPage.xaml">
+    <EmbeddedResource Update="Views\Inventario\ItemModifyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
