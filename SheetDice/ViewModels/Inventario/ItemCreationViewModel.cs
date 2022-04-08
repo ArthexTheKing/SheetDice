@@ -12,11 +12,6 @@ namespace SheetDice.ViewModels.Inventario
 {
     public partial class ItemCreationViewModel : ViewModelBase
     {
-        private const string Titolo = "Discard";
-        private const string Descrizione = "Are you sure you want to discard this item";
-        private const string Accetto = "Keep editing";
-        private const string Rifiuto = "Discard changes";
-
         [ObservableProperty]
         private string name = string.Empty;
         
@@ -36,7 +31,7 @@ namespace SheetDice.ViewModels.Inventario
         private bool isMagical = false;
         
         [ObservableProperty]
-        private string description = "";
+        private string description = string.Empty;
 
         public List<ItemType> ItemTypes { get; set; }
         
@@ -49,7 +44,7 @@ namespace SheetDice.ViewModels.Inventario
         [ICommand]
         private async Task GoBack()
         {
-            bool risposta = await Application.Current.MainPage.DisplayAlert(Titolo, Descrizione, Accetto, Rifiuto);
+            bool risposta = await Application.Current.MainPage.DisplayAlert("Discard", "Are you sure you want to discard this item", "Keep editing", "Discard changes");
             if (!risposta)
                 await Shell.Current.GoToAsync("..");
         }
