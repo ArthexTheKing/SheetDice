@@ -4,7 +4,8 @@
        xmlns:local="clr-namespace:SheetDice.Views"
        xmlns:inventario="clr-namespace:SheetDice.Views.Inventario"
        Title="SheetDice"
-       x:Class="SheetDice.AppShell">
+       x:Class="SheetDice.AppShell"
+       FlyoutHeaderBehavior="CollapseOnScroll">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -36,7 +37,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
+                                    <Setter Property="BackgroundColor" Value="White"/>
                                     <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
                                 </VisualState.Setters>
                             </VisualState>
@@ -59,7 +60,8 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="White" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Black" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -77,14 +79,53 @@
     
     <!-- Elemento Flyout per tutte le pagine della scheda del personaggio -->
     <FlyoutItem FlyoutItemIsVisible="False">
+
         <Tab>
             <ShellContent Title="blank" Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
             <ShellContent Title="Inventory" Route="InventoryPage" ContentTemplate="{DataTemplate inventario:InventoryPage}"/>
-            <ShellContent Route="Principale" ContentTemplate="{DataTemplate local:Page1}" />
         </Tab>
+
+        
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="BlankMenuItem" StyleClass="MenuItemLayoutStyle" />
+    <!-- <MenuItem Text="BlankMenuItem" StyleClass="MenuItemLayoutStyle" /> -->
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" IsEnabled="False">
+        <ShellContent Title="Nome PG"/>
+        <ShellContent Title="Livello PG"/>
+        <ShellContent Title="Allineamento PG"/>
+        <ShellContent Title="Classe e sottoclasse"/>
+        <ShellContent Title="Razza e sottorazza"/>
+        <ShellContent Title="Background"/>
+    </FlyoutItem>
 
+    <FlyoutItem Title="Opzioni">
+        <ShellContent Route="Opzioni" ContentTemplate="{DataTemplate local:Opzioni}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="About us">
+        <ShellContent Route="AboutUs" ContentTemplate="{DataTemplate local:AboutUs}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Help">
+        <ShellContent Route="Help" ContentTemplate="{DataTemplate local:Help}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Character Selection">
+        <ShellContent Route="CharacterSelection" ContentTemplate="{DataTemplate local:CharacterSelection}" />
+    </FlyoutItem>
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="{StaticResource Primary}"
+                  HeightRequest="200">
+                <Image Aspect="AspectFill"
+                    Source="https://www.cmete.com/skins/theme_cmete_2016/images/placeholders/office-image-placeholder.jpg"
+                    Opacity="0.6" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    
 </Shell>

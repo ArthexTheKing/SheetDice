@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
+             x:Class="SheetDice.Views.CharacterCreation"
+             x:DataType="viewmodels:AddCharacterViewModel"
+             Shell.PresentationMode="Modal">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddCharacterViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Name:"/>
+            <Entry Text="{Binding Name}"/>
+            <Label Text="Class:"/>
+            <Entry Text="{Binding Classe}"/>
+            <Label Text="Level:"/>
+            <Entry Text="{Binding Level}"/>
+            <Label Text="Alignement:"/>
+            <Entry Text="{Binding Alignement}"/>
+            <Label Text="Race:"/>
+            <Entry Text="{Binding Race}"/>
+            <Label Text="Background:"/>
+            <Entry Text="{Binding Background}"/>
+            <Label Text="Subclass:"/>
+            <Entry Text="{Binding Subclass}"/>
+            <Label Text="Subrace:"/>
+            <Entry Text="{Binding Subrace}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+
+            <Button Text="Save" 
+                    Padding="20,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Command="{Binding SaveCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

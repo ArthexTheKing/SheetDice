@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:SheetDice.Models"
+             x:Class="SheetDice.Views.CharacterDetail"
+             x:DataType="models:Character"
+             Title="{Binding Name}">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="{Binding Name, StringFormat='Name: {0}'}" />
+            <Label Text="{Binding Classe, StringFormat='Class: {0}'}" />
+            <Label Text="{Binding Level, StringFormat='Level: {0}'}" />
+            <Label Text="{Binding Alignment, StringFormat='Alignement: {0}'}" />
+            <Label Text="{Binding Race, StringFormat='Race: {0}'}" />
+            <Label Text="{Binding Background, StringFormat='Background: {0}'}" />
+            <Label Text="{Binding Subclass, StringFormat='Subclass: {0}'}" />
+            <Label Text="{Binding Subrace, StringFormat='Subrace: {0}'}" />
+            <Button Text="Done" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
