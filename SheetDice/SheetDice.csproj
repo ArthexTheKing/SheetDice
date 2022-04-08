@@ -18,12 +18,17 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Compile Update="Views\PrincipalePage.xaml.cs">
+      <DependentUpon>PrincipalePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\BlankPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+
+    
     <EmbeddedResource Update="Views\Inventario\InventoryPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -31,6 +36,8 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Inventario\ItemModifyPage.xaml">
+    <EmbeddedResource Update="Views\PrincipalePage.xaml">
+
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

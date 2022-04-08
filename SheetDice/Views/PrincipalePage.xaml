@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels" 
+             x:DataType="viewmodels:AttackViewModel"
+             xmlns:models="clr-namespace:SheetDice.Models" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="SheetDice.Views.Page1"
+             x:Name="PrincipalePage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AttackViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="GridColor">Red</Color>
+            <Style x:Key="GridStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="LightBlue"></Setter>
+                <Setter Property="CornerRadius" Value="1000"></Setter>
+                <Setter Property="Color" Value="{StaticResource GridColor}"></Setter>
+                <Setter Property="HeightRequest" Value="20"></Setter>
+            </Style>
+            <Style x:Key="Trasparente" TargetType="BoxView">
+                <Setter Property="Color" Value="Transparent">
+                </Setter>
+            </Style>
+            <Style x:Key="Azzurrino" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="LightBlue"></Setter>
+            </Style>
+            <Style x:Key="PrincipalButton" TargetType="Button">
+                <Setter Property="Text" Value="+"></Setter>
+                <Setter Property="BackgroundColor" Value="LightBlue"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                <Setter Property="WidthRequest" Value="60"></Setter>
+                <Setter Property="HeightRequest" Value="60"></Setter>
+                <Setter Property="CornerRadius" Value="100"></Setter>
+            </Style>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource Azzurrino}">
+            <Label Text="Name:" FontSize="Medium"></Label>
+            <Entry x:Name="Nome">
+            </Entry>
+        </StackLayout>
+        <StackLayout Grid.Row="0" Grid.Column="2" Style="{StaticResource Azzurrino}">
+            <Label Text="LV:" FontSize="Medium"></Label>
+            <Entry x:Name="Livello" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center">
+            </Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="1">
+            <Label Text="HP MAX" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Start"></Label>
+            <Entry x:Name="HpMax" Keyboard="Numeric" HorizontalTextAlignment="Center">
+            </Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="1" Grid.Row="1">
+            <Label Text="HP" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Start"></Label>
+            <Entry x:Name="Hp" Keyboard="Numeric" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="2" Grid.Row="1">
+            <Label Text="HP Temp" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Start"></Label>
+            <Entry x:Name="HpTemp" Keyboard="Numeric" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="2">
+            <Label Text="HD:" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"></Label>
+        </StackLayout>
+        <StackLayout Grid.Column="1" Grid.Row="2">
+            <Label x:Name="Hd" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Large" Text="0"></Label>
+        </StackLayout>
+        <StackLayout Grid.Column="2" Grid.Row="2">
+            <Button Text="+" VerticalOptions="CenterAndExpand" FontSize="Body" HeightRequest="35" Clicked="HdAumento" BackgroundColor="LightBlue"></Button>
+            <Button Text="-" VerticalOptions="CenterAndExpand" FontSize="Body" HeightRequest="35" Clicked="HdMeno" BackgroundColor="LightBlue"></Button>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="3">
+            <Label Text="AC" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
+            <Entry x:Name="Ac" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="1" Grid.Row="3">
+            <Label Text="Prof. Bonus" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
+            <Entry x:Name="ProfBonus" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="2" Grid.Row="3">
+            <Label Text="Initiative" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
+            <Entry x:Name="Initiative" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="4">
+            <Label Text="Speed" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
+            <Entry x:Name="Speed" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="1" Grid.Row="4">
+            <Label Text="PP" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
+            <Entry x:Name="PassivePerception" Keyboard="Numeric" MaxLength="2" HorizontalTextAlignment="Center"></Entry>
+        </StackLayout>
+        <StackLayout Grid.Column="2" Grid.Row="4">
+            <Label Text="Inspiration" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"></Label>
+            <Button Style="{StaticResource PrincipalButton}" Text="X" HorizontalOptions="Center" Clicked="Ispirazione"></Button>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="5">
+            <Label Text="Attacks:" FontSize="Large" VerticalOptions="EndAndExpand"></Label>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3">
+            <ListView SelectedItem="{Binding SelectedAttack, Mode=TwoWay}"
+                      CachingStrategy="RecycleElement"
+                      BackgroundColor="Transparent"
+                      ItemsSource="{Binding Attacks}"
+                      SeparatorColor="Black"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      RefreshControlColor="DeepSkyBlue">
+                <ListView.Behaviors>
+                    <xct:EventToCommandBehavior
+                    EventName="ItemSelected"
+                    Command="{Binding SelectedCommand}"
+
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Attack">
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Favourite" 
+                                          Command="{Binding Source={x:Reference PrincipalePage}, Path=BindingContext.FavoriteComand}" 
+                                          CommandParameter="{Binding .}"/>
+                                <MenuItem 
+                                        Command="{Binding Source={x:Reference PrincipalePage}, Path=BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsDestructive="True"
+                                        Text="Delete"/>
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout  Grid.Column="0">
+                                    <Label VerticalOptions="Center" FontSize="Medium" Text="{Binding Name}"></Label>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Label VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding Damage}">
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label Grid.Column="1" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding Type}"></Label>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <StackLayout Grid.Column="0" Grid.Row="7">
+            <Button Style="{StaticResource PrincipalButton}" Command="{Binding AddCommand}"></Button>
+        </StackLayout>
+    </Grid>
+</ContentPage>
