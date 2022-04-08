@@ -80,6 +80,7 @@
         <Tab>
             <ShellContent Title="blank" Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
             <ShellContent Title="Inventory" Route="InventoryPage" ContentTemplate="{DataTemplate inventario:InventoryPage}"/>
+            <ShellContent Route="Principale" ContentTemplate="{DataTemplate local:Page1}" />
         </Tab>
     </FlyoutItem>
 
