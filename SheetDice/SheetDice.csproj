@@ -14,9 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Schifo.xaml.cs">
-      <DependentUpon>Schifo.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\PrincipalePage.xaml.cs">
       <DependentUpon>PrincipalePage.xaml</DependentUpon>
     </Compile>
@@ -24,9 +21,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\BlankPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Schifo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PrincipalePage.xaml">

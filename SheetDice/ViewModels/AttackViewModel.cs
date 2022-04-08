@@ -29,9 +29,7 @@ namespace SheetDice.ViewModels
 
         public AttackViewModel()
         {
-            Attacks = new ObservableRangeCollection<Attack>
-            {
-            };
+            Attacks = new ObservableRangeCollection<Attack>();
 
             RefreshCommand = new AsyncCommand(Refresh);
             SelectedCommand = new AsyncCommand<object>(Selected);
