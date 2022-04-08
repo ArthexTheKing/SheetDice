@@ -36,9 +36,8 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Inventario\ItemModifyPage.xaml">
-    <EmbeddedResource Update="Views\PrincipalePage.xaml">    
-
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+	  
   </ItemGroup>
 </Project>
