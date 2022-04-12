@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:SheetDice.ViewModels"
+             x:Class="SheetDice.Views.AttackCreationPage"
+             x:DataType="viewmodels:AddAttackViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddAttackViewModel/>
+    </ContentPage.BindingContext>
+
+    <Shell.BackButtonBehavior/>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <Label Text="Name"></Label>
+                <Entry Text="{Binding Name}"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="1">
+                <Label Text="Damage"/>
+                <Entry Text="{Binding Damage}"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="2">
+                <Label Text="Type"/>
+                <Picker ItemsSource="{Binding DamageTypes}"
+                        SelectedItem="{Binding TypeSelected}"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="3">
+                <Label Text="Is Magic"/>
+                <CheckBox IsChecked="{Binding IsMagic}"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="4">
+                <Button Text="Save" Command="{Binding AddAttackCommand}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

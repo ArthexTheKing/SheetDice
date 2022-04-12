@@ -24,17 +24,10 @@ namespace SheetDice.Services
             await db.CreateTableAsync<Attack>();
         }
 
-        public static async Task AddAttack(string name, string damage, string type)
+        public static async Task AddAttack(Attack attack)
         {
             await Init();
-            var attack = new Attack
-            {
-                Name = name,
-                Damage = damage,
-                Type = type
-            };
-
-            var id = await db.InsertAsync(attack);
+            await db.InsertAsync(attack);
         }
 
         public static async Task RemoveAttack(int id)

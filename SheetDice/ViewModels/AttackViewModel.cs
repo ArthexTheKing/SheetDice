@@ -11,6 +11,8 @@ using SheetDice.Models;
 using Xamarin.Forms;
 using SheetDice.Services;
 using Command = MvvmHelpers.Commands.Command;
+using SheetDice.Views;
+
 
 namespace SheetDice.ViewModels
 {
@@ -50,13 +52,10 @@ namespace SheetDice.ViewModels
             IsBusy = false;
         }
 
-        async Task Add()
+        private async Task Add()
         {
-            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Attack name");
-            var type = await App.Current.MainPage.DisplayPromptAsync("Type", "Attack type");
-            var damage = await App.Current.MainPage.DisplayPromptAsync("Damage", "Damage of the attack");
-            await AttacksDatabase.AddAttack(name, type, damage);
-            await Refresh();
+            var route = $"{nameof(AttackCreationPage)}";
+            await Shell.Current.GoToAsync(route);
         }
 
         async Task Remove(Attack attack)
