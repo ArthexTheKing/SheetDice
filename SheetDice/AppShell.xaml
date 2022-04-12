@@ -83,6 +83,7 @@
         <Tab>
             <ShellContent Title="blank" Route="BlankPage" ContentTemplate="{DataTemplate local:BlankPage}" />
             <ShellContent Title="Inventory" Route="InventoryPage" ContentTemplate="{DataTemplate inventario:InventoryPage}"/>
+            <ShellContent Title="Principale" Route="PrincipalePage" ContentTemplate="{DataTemplate local:Principale}"/>
         </Tab>
 
         
