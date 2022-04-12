@@ -1,5 +1,4 @@
-﻿using SheetDice.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace SheetDice.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CharacterSelection : ContentPage
+    public partial class RegistrationPage : ContentPage
     {
-        public CharacterSelection()
+        public RegistrationPage()
         {
             InitializeComponent();
-        }
-
-        private async void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }

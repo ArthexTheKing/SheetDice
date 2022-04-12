@@ -78,6 +78,12 @@
     -->
     
     <!-- Elemento Flyout per tutte le pagine della scheda del personaggio -->
+
+
+    <ShellItem Route="LoginPage" FlyoutItemIsVisible="False">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
+    </ShellItem>
+    
     <FlyoutItem FlyoutItemIsVisible="False">
 
         <Tab>
