@@ -9,7 +9,18 @@
         <viewmodels:AddAttackViewModel/>
     </ContentPage.BindingContext>
 
-    <Shell.BackButtonBehavior/>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackCommand}"/>
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid>
@@ -21,24 +32,29 @@
             </Grid.ColumnDefinitions>
         
             <StackLayout Grid.Column="0" Grid.Row="0">
-                <Label Text="Name"></Label>
+                <Label Text="Name" Style="{StaticResource TextStyle}"/>
                 <Entry Text="{Binding Name}"/>
             </StackLayout>
             <StackLayout Grid.Column="0" Grid.Row="1">
-                <Label Text="Damage"/>
+                <Label Text="Damage" Style="{StaticResource TextStyle}"/>
                 <Entry Text="{Binding Damage}"/>
             </StackLayout>
             <StackLayout Grid.Column="0" Grid.Row="2">
-                <Label Text="Type"/>
+                <Label Text="Statistic" Style="{StaticResource TextStyle}"/>
+                <Picker ItemsSource="{Binding StatTypes}"
+                        SelectedItem="{Binding StatSelected}"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="3">
+                <Label Text="Type" Style="{StaticResource TextStyle}"/>
                 <Picker ItemsSource="{Binding DamageTypes}"
                         SelectedItem="{Binding TypeSelected}"/>
             </StackLayout>
-            <StackLayout Grid.Column="0" Grid.Row="3">
-                <Label Text="Is Magic"/>
-                <CheckBox IsChecked="{Binding IsMagic}"/>
-            </StackLayout>
             <StackLayout Grid.Column="0" Grid.Row="4">
-                <Button Text="Save" Command="{Binding AddAttackCommand}"/>
+                <Label Text="Is Magic" Style="{StaticResource TextStyle}"/>
+                <CheckBox IsChecked="{Binding IsMagic}" Color="LightBlue"/>
+            </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="5">
+                <Button Text="Save" BackgroundColor="LightBlue" VerticalOptions="EndAndExpand" Command="{Binding AddAttackCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
