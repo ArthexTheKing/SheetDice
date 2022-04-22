@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using SheetDice.Models;
-using SheetDice.Services;
 using SheetDice.Services.Repository;
 using SheetDice.ViewModels.Base;
-using SheetDice.Views;
 using SheetDice.Views.Inventario;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +14,14 @@ namespace SheetDice.ViewModels.Inventario
 {
     public partial class InventoryViewModel : ViewModelBase
     {
-        private readonly Sqlite<Item> itemDatabase;
+        private readonly LocalDB<Item> itemDatabase;
         public ObservableRangeCollection<Item> Equipment { get; set; }
 
         public InventoryViewModel()
         {
             Title = "EquipmentPage";
             Equipment = new ObservableRangeCollection<Item>();
-            itemDatabase = new Sqlite<Item>();
+            itemDatabase = new LocalDB<Item>();
         }
 
         [ObservableProperty]
@@ -69,7 +68,8 @@ namespace SheetDice.ViewModels.Inventario
             bool risposta = await Application.Current.MainPage.DisplayAlert(item.Name, TextDescription(item), "Modifica", "Ok");
             if (risposta)
             {
-                var route = $"{nameof(ItemModifyPage)}?ItemId={item.Id}";
+                string toModify = JsonConvert.SerializeObject(item);
+                var route = $"{nameof(ItemModifyPage)}?SendItem={toModify}";
                 await Shell.Current.GoToAsync(route);
             }
         }

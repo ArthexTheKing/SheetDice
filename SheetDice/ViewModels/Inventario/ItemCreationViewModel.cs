@@ -33,14 +33,14 @@ namespace SheetDice.ViewModels.Inventario
         [ObservableProperty]
         private string description = string.Empty;
 
-        private readonly Sqlite<Item> itemDatabase;
+        private readonly LocalDB<Item> itemDatabase;
 
         public List<ItemType> ItemTypes { get; set; }
         
         public ItemCreationViewModel()
         {
             ItemTypes = new List<ItemType>();
-            itemDatabase = new Sqlite<Item>();
+            itemDatabase = new LocalDB<Item>();
             LoadEnumList();
         }
 

@@ -1,6 +1,8 @@
-﻿using MvvmHelpers.Commands;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
 using SheetDice.Models;
-using SheetDice.Services;
+using SheetDice.Services.Repository;
 using SheetDice.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -9,59 +11,60 @@ using Xamarin.Forms;
 
 namespace SheetDice.ViewModels.Inventario
 {
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    [QueryProperty(nameof(LoadItem), "SendItem")]
     public partial class ItemModifyViewModel : ViewModelBase
     {
-        private const string Titolo = "Discard";
-        private const string Descrizione = "Are you sure you want to discard this item";
-        private const string Accetto = "Keep editing";
-        private const string Rifiuto = "Discard changes";
 
-        string name = "";
-        string weight = "0.0";
-        string value = "0";
-        string quantity = "1";
+        [ObservableProperty]
+        private string name;
+
+        [ObservableProperty]
+        private string weight;
+
+        [ObservableProperty]
+        private string value;
+
+        [ObservableProperty]
+        private string quantity;
+
+        [ObservableProperty]
         ItemType categorySelected;
-        bool isMagical = false;
-        string description = "";
 
-        string itemId;
-        public string ItemId
+        [ObservableProperty]
+        private bool isMagical;
+
+        [ObservableProperty]
+        private string description;
+
+        public string LoadItem
         {
-            get => itemId;
             set 
             { 
-                //Item item Provare ad utilizzare un json, 
-                //Uri.UnescapeDataString(value); 
-                //SetProperty(ref itemId, value);
-                //int ident = int.Parse(itemId);
-                //Item item = ItemDatabase.GetItem(ident).Result;
-                //NameEntry = item.Name;
-               
+                Item item = JsonConvert.DeserializeObject<Item>(value);
+                Name = item.Name;
+                Weight = item.Weight.ToString();
+                Value = item.Value.ToString();
+                Quantity = item.Quantity.ToString();
+                CategorySelected = item.Category;
+                IsMagical = item.IsMagical;
+                Description = item.Description;
+                toModify = item;
             }
         }
 
-        public string NameEntry { get => name; set => SetProperty(ref name, value); }
-        public string WeightEntry { get => weight; set => SetProperty(ref weight, value); }
-        public string ValueEntry { get => value; set => SetProperty(ref value, value); }
-        public string QuantityEntry { get => quantity; set => SetProperty(ref quantity, value); }
-        public ItemType CategorySelected { get => categorySelected; set => SetProperty(ref categorySelected, value); }
-        public bool IsMagicalCheck { get => isMagical; set => SetProperty(ref isMagical, value); }
-        public string DescriptionEditor { get => description; set => SetProperty(ref description, value); }
+        private Item toModify;
+        private readonly LocalDB<Item> itemDatabase;
 
         public List<ItemType> ItemTypes { get; set; }
-        public AsyncCommand SaveCommand { get; }
-        public AsyncCommand GoBackCommand { get; }
-
+        
         public ItemModifyViewModel()
         {
             ItemTypes = new List<ItemType>();
+            itemDatabase = new LocalDB<Item>();
             LoadEnumList();
-
-            SaveCommand = new AsyncCommand(Save);
-            GoBackCommand = new AsyncCommand(GoBack);
         }
 
+        [ICommand]
         async Task GoBack()
         {
             bool risposta = await Application.Current.MainPage.DisplayAlert("Discard", "Are you sure you want to discard this item", "Keep editing", "Discard changes");
@@ -69,8 +72,17 @@ namespace SheetDice.ViewModels.Inventario
                 await Shell.Current.GoToAsync("..");
         }
 
+        [ICommand]
         async Task Save()
         {
+            toModify.Name = Name;
+            toModify.Weight = double.Parse(Weight);
+            toModify.Value = int.Parse(Value);
+            toModify.Quantity = int.Parse(Quantity);
+            toModify.Category = CategorySelected;
+            toModify.IsMagical = IsMagical;
+            toModify.Description = Description;
+            await itemDatabase.Update(toModify);
             await Shell.Current.GoToAsync("..");
         }
 
