@@ -1,5 +1,6 @@
 ﻿using MvvmHelpers.Commands;
 using SheetDice.Models;
+using SheetDice.Services;
 using SheetDice.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,16 @@ namespace SheetDice.ViewModels.Inventario
         public string ItemId
         {
             get => itemId;
-            set => SetProperty(ref itemId, value);
+            set 
+            { 
+                //Item item Provare ad utilizzare un json, 
+                Uri.UnescapeDataString(value); 
+                SetProperty(ref itemId, value);
+                int ident = int.Parse(itemId);
+                Item item = ItemDatabase.GetItem(ident).Result;
+                NameEntry = item.Name;
+               
+            }
         }
 
         public string NameEntry { get => name; set => SetProperty(ref name, value); }
