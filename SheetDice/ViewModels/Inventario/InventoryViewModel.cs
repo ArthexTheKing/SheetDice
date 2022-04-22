@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SheetDice.Models;
 using SheetDice.Services;
+using SheetDice.Services.Repository;
 using SheetDice.ViewModels.Base;
 using SheetDice.Views;
 using SheetDice.Views.Inventario;
@@ -14,13 +15,14 @@ namespace SheetDice.ViewModels.Inventario
 {
     public partial class InventoryViewModel : ViewModelBase
     {
+        private readonly Sqlite<Item> itemDatabase;
         public ObservableRangeCollection<Item> Equipment { get; set; }
 
         public InventoryViewModel()
         {
             Title = "EquipmentPage";
             Equipment = new ObservableRangeCollection<Item>();
-            _ = LoadInventory();
+            itemDatabase = new Sqlite<Item>();
         }
 
         [ObservableProperty]
@@ -38,7 +40,7 @@ namespace SheetDice.ViewModels.Inventario
                 return;
             }
             item.Quantity = int.Parse(quantity);
-            await ItemDatabase.UpdateItem(item);
+            await itemDatabase.Update(item);
             await Refresh();
         }
 
@@ -52,7 +54,7 @@ namespace SheetDice.ViewModels.Inventario
         [ICommand]
         private async Task RemoveItem(Item item)
         {
-            await ItemDatabase.RemoveItem(item.Id);
+            await itemDatabase.Delete(item);
             await Refresh();
         }
 
@@ -84,7 +86,7 @@ namespace SheetDice.ViewModels.Inventario
 
         private async Task LoadInventory()
         {
-            var items = await ItemDatabase.GetItems();
+            var items = await itemDatabase.GetAll();
             Equipment.AddRange(items);
             Weight = EvaluateWeight();
         }

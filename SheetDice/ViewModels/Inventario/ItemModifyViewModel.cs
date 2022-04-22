@@ -32,11 +32,11 @@ namespace SheetDice.ViewModels.Inventario
             set 
             { 
                 //Item item Provare ad utilizzare un json, 
-                Uri.UnescapeDataString(value); 
-                SetProperty(ref itemId, value);
-                int ident = int.Parse(itemId);
-                Item item = ItemDatabase.GetItem(ident).Result;
-                NameEntry = item.Name;
+                //Uri.UnescapeDataString(value); 
+                //SetProperty(ref itemId, value);
+                //int ident = int.Parse(itemId);
+                //Item item = ItemDatabase.GetItem(ident).Result;
+                //NameEntry = item.Name;
                
             }
         }

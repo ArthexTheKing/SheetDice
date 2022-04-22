@@ -4,39 +4,39 @@ using System.Threading.Tasks;
 
 namespace SheetDice.Services.Repository
 {
-    public class Sqlite<T> : IDatabase<T> where T : new()
+    public class LocalDB<T> : IDatabase<T> where T : new()
     {
-        private SQLiteAsyncConnection DataBase { get; set; }
+        private readonly SQLiteAsyncConnection dataBase;
 
-        public Sqlite()
+        public LocalDB()
         {
-            DataBase = App.DataBase;
-            DataBase.CreateTableAsync<T>();
+            dataBase = App.DataBase;
+            dataBase.CreateTableAsync<T>();
         }
 
         public async Task Insert(T obj)
         {
-            await DataBase.InsertAsync(obj);
+            await dataBase.InsertAsync(obj);
         }
 
         public async Task Update(T obj)
         {
-            await DataBase.UpdateAsync(obj);
+            await dataBase.UpdateAsync(obj);
         }
 
         public async Task Delete(T obj)
         {
-            await DataBase.DeleteAsync(obj);
+            await dataBase.DeleteAsync(obj);
         }
 
         public async Task<T> Get(int id)
         {
-            return await DataBase.GetAsync<T>(id);
+            return await dataBase.GetAsync<T>(id);
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await DataBase.Table<T>().ToListAsync();
+            return await dataBase.Table<T>().ToListAsync();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SheetDice.Models;
-using SheetDice.Services;
+using SheetDice.Services.Repository;
 using SheetDice.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -33,11 +33,14 @@ namespace SheetDice.ViewModels.Inventario
         [ObservableProperty]
         private string description = string.Empty;
 
+        private readonly Sqlite<Item> itemDatabase;
+
         public List<ItemType> ItemTypes { get; set; }
         
         public ItemCreationViewModel()
         {
             ItemTypes = new List<ItemType>();
+            itemDatabase = new Sqlite<Item>();
             LoadEnumList();
         }
 
@@ -57,19 +60,6 @@ namespace SheetDice.ViewModels.Inventario
                 await Application.Current.MainPage.DisplayAlert("Invalid Item", "type a name for the item", "close");
                 return;
             }
-            Item item = CreateItem();
-            await ItemDatabase.AddItem(item);
-            await Shell.Current.GoToAsync("..");
-        }
-
-        private void LoadEnumList()
-        {
-            foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
-                ItemTypes.Add(itemType);
-        }
-
-        private Item CreateItem()
-        {
             Item item = new()
             {
                 Name = Name,
@@ -81,7 +71,14 @@ namespace SheetDice.ViewModels.Inventario
                 Description = Description,
                 IsEquipped = true
             };
-            return item;
+            await itemDatabase.Insert(item);
+            await Shell.Current.GoToAsync("..");
+        }
+
+        private void LoadEnumList()
+        {
+            foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
+                ItemTypes.Add(itemType);
         }
     }
 }
